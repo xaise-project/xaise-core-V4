@@ -8,7 +8,7 @@ interface StakeTokenProps {
   onTokenChange: (token: string) => void // Token değişim fonksiyonu
 }
 
-const StakeToken: React.FC<StakeTokenProps> = ({ selectedToken, onTokenChange }) => {
+const StakeToken: React.FC<StakeTokenProps> = ({ selectedToken }) => {
   return (
     <div className="stake-token-container"> {/* Ana stake token container */}
       {/* Başlık */}

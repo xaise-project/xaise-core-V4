@@ -44,6 +44,10 @@ erDiagram
     PROTOCOLS ||--o{ COMMENTS : receives
     USERS ||--o{ FAVORITES : has
     PROTOCOLS ||--o{ FAVORITES : in
+    USERS ||--o{ STAKES : creates
+    PROTOCOLS ||--o{ STAKES : receives
+    STAKES ||--o{ REWARDS : generates
+    USERS ||--o{ REWARDS : earns
     
     USERS {
         uuid id PK
@@ -76,6 +80,29 @@ erDiagram
         uuid id PK
         uuid user_id FK
         uuid protocol_id FK
+        timestamp created_at
+    }
+    
+    STAKES {
+        uuid id PK
+        uuid user_id FK
+        uuid protocol_id FK
+        decimal amount
+        integer lock_period
+        timestamp start_date
+        timestamp end_date
+        string status
+        timestamp created_at
+    }
+    
+    REWARDS {
+        uuid id PK
+        uuid user_id FK
+        uuid stake_id FK
+        decimal amount
+        timestamp reward_date
+        boolean claimed
+        timestamp claim_date
         timestamp created_at
     }
 ```
@@ -169,4 +196,55 @@ CREATE INDEX idx_favorites_user_id ON favorites(user_id);
 -- Supabase yetkilendirme
 GRANT SELECT ON favorites TO anon;
 GRANT ALL PRIVILEGES ON favorites TO authenticated;
+```
+
+**Stakes Tablosu (stakes)**
+```sql
+-- Stakes tablosu oluştur
+CREATE TABLE stakes (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    protocol_id UUID REFERENCES protocols(id) ON DELETE CASCADE,
+    amount DECIMAL(18,8) NOT NULL,
+    lock_period INTEGER NOT NULL, -- gün cinsinden
+    start_date TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    end_date TIMESTAMP WITH TIME ZONE NOT NULL,
+    status VARCHAR(20) CHECK (status IN ('active', 'completed', 'cancelled')) DEFAULT 'active',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- İndeks oluştur
+CREATE INDEX idx_stakes_user_id ON stakes(user_id);
+CREATE INDEX idx_stakes_protocol_id ON stakes(protocol_id);
+CREATE INDEX idx_stakes_status ON stakes(status);
+CREATE INDEX idx_stakes_end_date ON stakes(end_date);
+
+-- Supabase yetkilendirme
+GRANT SELECT ON stakes TO anon;
+GRANT ALL PRIVILEGES ON stakes TO authenticated;
+```
+
+**Rewards Tablosu (rewards)**
+```sql
+-- Rewards tablosu oluştur
+CREATE TABLE rewards (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    stake_id UUID REFERENCES stakes(id) ON DELETE CASCADE,
+    amount DECIMAL(18,8) NOT NULL,
+    reward_date TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    claimed BOOLEAN DEFAULT FALSE,
+    claim_date TIMESTAMP WITH TIME ZONE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- İndeks oluştur
+CREATE INDEX idx_rewards_user_id ON rewards(user_id);
+CREATE INDEX idx_rewards_stake_id ON rewards(stake_id);
+CREATE INDEX idx_rewards_claimed ON rewards(claimed);
+CREATE INDEX idx_rewards_reward_date ON rewards(reward_date DESC);
+
+-- Supabase yetkilendirme
+GRANT SELECT ON rewards TO anon;
+GRANT ALL PRIVILEGES ON rewards TO authenticated;
 ```

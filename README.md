@@ -19,14 +19,13 @@ Kullanıcıların staking protokollerini kolayca takip edebileceği, stake işle
 
 ### Styling & UI
 - **Tailwind CSS 3.3.3** - Utility-first CSS framework
-- **Modern Dark Theme** - Koyu tema tasarım
+- **Custom CSS** - Özel stil dosyaları
 - **Lucide React 0.263.1** - Modern ikon kütüphanesi
 
-### Backend & Database
-- **Supabase** - Backend-as-a-Service platform
-- **PostgreSQL** - İlişkisel veritabanı
-- **Supabase Auth** - Kullanıcı kimlik doğrulama
-- **Real-time Subscriptions** - Gerçek zamanlı veri güncellemeleri
+### Grafik & Görselleştirme
+- **Recharts 2.8.0** - React grafik kütüphanesi
+- **SVG Graphics** - Özel SVG grafik implementasyonu
+- **CSS Animations** - Smooth geçiş efektleri
 
 ### Geliştirme Araçları
 - **ESLint** - Kod kalitesi kontrolü
@@ -44,7 +43,7 @@ Kullanıcıların staking protokollerini kolayca takip edebileceği, stake işle
 
 1. **Projeyi klonlayın**
 ```bash
-git clone https://github.com/xaise-project/stakehub-dashboard.git
+git clone https://github.com/xaise-project/xaise-core-V4.git
 cd stakehub-dashboard
 ```
 
