@@ -1,0 +1,248 @@
+/* Stake Token ana container stilleri */
+.stake-token-container {
+  background-color: #252730; /* Koyu arka plan rengi */
+  border-radius: 12px; /* Köşe yuvarlaklığı */
+  padding: 24px; /* İç padding */
+  border: 1px solid #3a3b47; /* Kenarlık */
+  margin-bottom: 24px; /* Alt margin */
+}
+
+/* Stake token başlığı stilleri */
+.stake-token-header {
+  display: flex; /* Flex layout */
+  justify-content: space-between; /* İki uca yasla */
+  align-items: center; /* Dikey hizalama */
+  margin-bottom: 24px; /* Alt margin */
+}
+
+/* Stake token başlık metni */
+.stake-token-title {
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 18px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+  margin: 0; /* Margin sıfırla */
+}
+
+/* Polygon badge stilleri */
+.polygon-badge {
+  background-color: #8b5cf6; /* Mor arka plan */
+  border-radius: 20px; /* Köşe yuvarlaklığı */
+  padding: 6px 12px; /* İç padding */
+}
+
+/* Polygon metni stilleri */
+.polygon-text {
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 12px; /* Font boyutu */
+  font-weight: 500; /* Font kalınlığı */
+}
+
+/* Token seçimi container stilleri */
+.token-selection {
+  margin-bottom: 24px; /* Alt margin */
+}
+
+/* Token etiketi stilleri */
+.token-label {
+  display: block; /* Block display */
+  color: #9ca3af; /* Gri metin rengi */
+  font-size: 14px; /* Font boyutu */
+  font-weight: 500; /* Font kalınlığı */
+  margin-bottom: 8px; /* Alt margin */
+}
+
+/* Token dropdown container stilleri */
+.token-dropdown {
+  position: relative; /* Relative pozisyon */
+}
+
+/* Seçili token gösterimi stilleri */
+.selected-token {
+  background-color: #1a1b23; /* Koyu arka plan */
+  border: 1px solid #3a3b47; /* Kenarlık */
+  border-radius: 8px; /* Köşe yuvarlaklığı */
+  padding: 12px 16px; /* İç padding */
+  display: flex; /* Flex layout */
+  justify-content: space-between; /* İki uca yasla */
+  align-items: center; /* Dikey hizalama */
+  cursor: pointer; /* İmleç pointer */
+  transition: all 0.2s ease; /* Geçiş animasyonu */
+}
+
+/* Seçili token hover durumu */
+.selected-token:hover {
+  border-color: #4f8ff7; /* Hover kenarlık rengi */
+}
+
+/* Token bilgileri container */
+.token-info {
+  display: flex; /* Flex layout */
+  align-items: center; /* Dikey hizalama */
+  gap: 12px; /* Elementler arası boşluk */
+}
+
+/* Token ikonu stilleri */
+.token-icon {
+  width: 32px; /* İkon genişliği */
+  height: 32px; /* İkon yüksekliği */
+  display: flex; /* Flex layout */
+  align-items: center; /* Dikey hizalama */
+  justify-content: center; /* Yatay hizalama */
+}
+
+/* Token dairesi stilleri */
+.token-circle {
+  width: 24px; /* Daire genişliği */
+  height: 24px; /* Daire yüksekliği */
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6); /* Gradient arka plan */
+  border-radius: 50%; /* Yuvarlak daire */
+}
+
+/* Token detayları container */
+.token-details {
+  display: flex; /* Flex layout */
+  flex-direction: column; /* Dikey yönlendirme */
+  gap: 2px; /* Elementler arası boşluk */
+}
+
+/* Token adı stilleri */
+.token-name {
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 14px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+}
+
+/* Token türü stilleri */
+.token-type {
+  color: #9ca3af; /* Gri metin rengi */
+  font-size: 12px; /* Font boyutu */
+  font-weight: 500; /* Font kalınlığı */
+}
+
+/* Dropdown ikonu stilleri */
+.dropdown-icon {
+  width: 20px; /* İkon genişliği */
+  height: 20px; /* İkon yüksekliği */
+  color: #9ca3af; /* Gri ikon rengi */
+}
+
+/* Stake miktarı bölümü stilleri */
+.stake-amount-section {
+  margin-bottom: 24px; /* Alt margin */
+}
+
+/* Miktar etiketi stilleri */
+.amount-label {
+  display: block; /* Block display */
+  color: #9ca3af; /* Gri metin rengi */
+  font-size: 14px; /* Font boyutu */
+  font-weight: 500; /* Font kalınlığı */
+  margin-bottom: 8px; /* Alt margin */
+}
+
+/* Miktar input container stilleri */
+.amount-input-container {
+  position: relative; /* Relative pozisyon */
+  display: flex; /* Flex layout */
+  align-items: center; /* Dikey hizalama */
+}
+
+/* Miktar input stilleri */
+.amount-input {
+  width: 100%; /* Tam genişlik */
+  background-color: #1a1b23; /* Koyu arka plan */
+  border: 1px solid #3a3b47; /* Kenarlık */
+  border-radius: 8px; /* Köşe yuvarlaklığı */
+  padding: 12px 80px 12px 16px; /* İç padding (sağda token badge için yer) */
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 16px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+  outline: none; /* Outline kaldır */
+  transition: border-color 0.2s ease; /* Kenarlık rengi geçişi */
+}
+
+/* Miktar input focus durumu */
+.amount-input:focus {
+  border-color: #4f8ff7; /* Focus kenarlık rengi */
+}
+
+/* Token badge stilleri */
+.token-badge {
+  position: absolute; /* Absolute pozisyon */
+  right: 12px; /* Sağdan uzaklık */
+  background-color: #3a3b47; /* Koyu arka plan */
+  border-radius: 6px; /* Köşe yuvarlaklığı */
+  padding: 6px 12px; /* İç padding */
+}
+
+/* Badge metni stilleri */
+.badge-text {
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 12px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+}
+
+/* Stake butonu stilleri */
+.stake-button {
+  width: 100%; /* Tam genişlik */
+  background-color: #f59e0b; /* Turuncu arka plan */
+  border: none; /* Kenarlık yok */
+  border-radius: 8px; /* Köşe yuvarlaklığı */
+  padding: 14px; /* İç padding */
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 16px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+  cursor: pointer; /* İmleç pointer */
+  transition: all 0.2s ease; /* Geçiş animasyonu */
+  margin-bottom: 24px; /* Alt margin */
+}
+
+/* Stake butonu hover durumu */
+.stake-button:hover {
+  background-color: #d97706; /* Hover arka plan rengi */
+  transform: translateY(-1px); /* Hafif yukarı hareket */
+}
+
+/* Stake bilgileri container */
+.stake-info {
+  display: flex; /* Flex layout */
+  flex-wrap: wrap; /* Satır kaydırma */
+  gap: 8px; /* Elementler arası boşluk */
+}
+
+/* Bilgi öğesi stilleri */
+.info-item {
+  background-color: #1a1b23; /* Koyu arka plan */
+  border: 1px solid #3a3b47; /* Kenarlık */
+  border-radius: 6px; /* Köşe yuvarlaklığı */
+  padding: 6px 12px; /* İç padding */
+}
+
+/* Bilgi etiketi stilleri */
+.info-label {
+  color: #9ca3af; /* Gri metin rengi */
+  font-size: 12px; /* Font boyutu */
+  font-weight: 500; /* Font kalınlığı */
+}
+
+/* Responsive tasarım */
+@media (max-width: 768px) {
+  .stake-token-container {
+    padding: 16px; /* Mobilde padding azalt */
+  }
+  
+  .stake-token-header {
+    flex-direction: column; /* Dikey layout */
+    gap: 12px; /* Elementler arası boşluk */
+    align-items: flex-start; /* Sol hizalama */
+  }
+  
+  .amount-input {
+    font-size: 14px; /* Font boyutunu azalt */
+  }
+  
+  .stake-button {
+    padding: 12px; /* Buton padding'ini azalt */
+    font-size: 14px; /* Font boyutunu azalt */
+  }
+}

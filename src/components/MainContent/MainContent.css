@@ -1,0 +1,53 @@
+/* Ana içerik container stilleri */
+.main-content-container {
+  flex: 1; /* Kalan alanı kapla */
+  display: flex; /* Flex layout */
+  flex-direction: column; /* Dikey yönlendirme */
+  background-color: #1a1b23; /* Koyu arka plan rengi */
+  overflow-y: auto; /* Dikey scroll */
+  min-height: 100vh; /* Minimum yükseklik */
+}
+
+/* İçerik grid layout stilleri */
+.content-grid {
+  display: grid; /* Grid layout */
+  grid-template-columns: 1fr 400px; /* Sol kolon esnek, sağ kolon sabit genişlik */
+  gap: 24px; /* Grid elementleri arası boşluk */
+  padding: 24px; /* İç padding */
+  flex: 1; /* Kalan alanı kapla */
+}
+
+/* Sol kolon stilleri */
+.left-column {
+  display: flex; /* Flex layout */
+  flex-direction: column; /* Dikey yönlendirme */
+  gap: 24px; /* Elementler arası boşluk */
+  min-width: 0; /* Minimum genişlik sıfır */
+}
+
+/* Sağ kolon stilleri */
+.right-column {
+  display: flex; /* Flex layout */
+  flex-direction: column; /* Dikey yönlendirme */
+  gap: 24px; /* Elementler arası boşluk */
+  min-width: 0; /* Minimum genişlik sıfır */
+}
+
+/* Responsive tasarım */
+@media (max-width: 1200px) {
+  .content-grid {
+    grid-template-columns: 1fr 350px; /* Sağ kolonu daralt */
+  }
+}
+
+@media (max-width: 768px) {
+  .content-grid {
+    grid-template-columns: 1fr; /* Tek kolon layout */
+    gap: 16px; /* Boşluğu azalt */
+    padding: 16px; /* Padding'i azalt */
+  }
+  
+  .right-column {
+    order: -1; /* Sağ kolonu üste taşı */
+  }
+}

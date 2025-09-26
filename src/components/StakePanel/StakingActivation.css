@@ -1,0 +1,242 @@
+/* Staking Activation ana container stilleri */
+.staking-activation-container {
+  background-color: #252730; /* Koyu arka plan rengi */
+  border-radius: 12px; /* Köşe yuvarlaklığı */
+  padding: 24px; /* İç padding */
+  border: 1px solid #3a3b47; /* Kenarlık */
+  margin-bottom: 24px; /* Alt margin */
+}
+
+/* Activation başlığı stilleri */
+.activation-header {
+  display: flex; /* Flex layout */
+  justify-content: space-between; /* İki uca yasla */
+  align-items: center; /* Dikey hizalama */
+  margin-bottom: 24px; /* Alt margin */
+}
+
+/* Activation başlık metni */
+.activation-title {
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 18px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+  margin: 0; /* Margin sıfırla */
+}
+
+/* Durum badge stilleri */
+.status-badge {
+  display: flex; /* Flex layout */
+  align-items: center; /* Dikey hizalama */
+  gap: 6px; /* İkon ve metin arası boşluk */
+  padding: 6px 12px; /* İç padding */
+  border-radius: 20px; /* Köşe yuvarlaklığı */
+  font-size: 12px; /* Font boyutu */
+  font-weight: 500; /* Font kalınlığı */
+}
+
+/* Locked durum badge'i */
+.status-badge.locked {
+  background-color: #dc2626; /* Kırmızı arka plan */
+  color: #ffffff; /* Beyaz metin rengi */
+}
+
+/* Durum ikonu stilleri */
+.status-icon {
+  width: 14px; /* İkon genişliği */
+  height: 14px; /* İkon yüksekliği */
+}
+
+/* Durum metni stilleri */
+.status-text {
+  font-weight: 500; /* Font kalınlığı */
+}
+
+/* Activation form stilleri */
+.activation-form {
+  margin-bottom: 24px; /* Alt margin */
+}
+
+/* Form grubu stilleri */
+.form-group {
+  margin-bottom: 20px; /* Alt margin */
+}
+
+/* Form etiketi stilleri */
+.form-label {
+  display: block; /* Block display */
+  color: #9ca3af; /* Gri metin rengi */
+  font-size: 14px; /* Font boyutu */
+  font-weight: 500; /* Font kalınlığı */
+  margin-bottom: 8px; /* Alt margin */
+}
+
+/* Select container stilleri */
+.select-container {
+  position: relative; /* Relative pozisyon */
+}
+
+/* Select wrapper stilleri */
+.select-wrapper {
+  position: relative; /* Relative pozisyon */
+  display: flex; /* Flex layout */
+  align-items: center; /* Dikey hizalama */
+}
+
+/* Select ikonu stilleri */
+.select-icon {
+  position: absolute; /* Absolute pozisyon */
+  left: 12px; /* Soldan uzaklık */
+  width: 18px; /* İkon genişliği */
+  height: 18px; /* İkon yüksekliği */
+  color: #9ca3af; /* Gri ikon rengi */
+  z-index: 1; /* Z-index */
+}
+
+/* Form select stilleri */
+.form-select {
+  width: 100%; /* Tam genişlik */
+  background-color: #1a1b23; /* Koyu arka plan */
+  border: 1px solid #3a3b47; /* Kenarlık */
+  border-radius: 8px; /* Köşe yuvarlaklığı */
+  padding: 12px 40px 12px 40px; /* İç padding (ikon için yer bırak) */
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 14px; /* Font boyutu */
+  font-weight: 500; /* Font kalınlığı */
+  outline: none; /* Outline kaldır */
+  appearance: none; /* Varsayılan görünümü kaldır */
+  cursor: pointer; /* İmleç pointer */
+  transition: border-color 0.2s ease; /* Kenarlık rengi geçişi */
+}
+
+/* Form select focus durumu */
+.form-select:focus {
+  border-color: #4f8ff7; /* Focus kenarlık rengi */
+}
+
+/* Dropdown oku stilleri */
+.dropdown-arrow {
+  position: absolute; /* Absolute pozisyon */
+  right: 12px; /* Sağdan uzaklık */
+  width: 18px; /* İkon genişliği */
+  height: 18px; /* İkon yüksekliği */
+  color: #9ca3af; /* Gri ikon rengi */
+  pointer-events: none; /* Tıklama olaylarını engelle */
+}
+
+/* Miktar container stilleri */
+.amount-container {
+  position: relative; /* Relative pozisyon */
+  display: flex; /* Flex layout */
+  align-items: center; /* Dikey hizalama */
+}
+
+/* Miktar input stilleri */
+.amount-input {
+  width: 100%; /* Tam genişlik */
+  background-color: #1a1b23; /* Koyu arka plan */
+  border: 1px solid #3a3b47; /* Kenarlık */
+  border-radius: 8px; /* Köşe yuvarlaklığı */
+  padding: 12px 60px 12px 16px; /* İç padding (para birimi için yer) */
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 16px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+  outline: none; /* Outline kaldır */
+  transition: border-color 0.2s ease; /* Kenarlık rengi geçişi */
+}
+
+/* Miktar input focus durumu */
+.amount-input:focus {
+  border-color: #4f8ff7; /* Focus kenarlık rengi */
+}
+
+/* Para birimi badge stilleri */
+.currency-badge {
+  position: absolute; /* Absolute pozisyon */
+  right: 12px; /* Sağdan uzaklık */
+  background-color: #3a3b47; /* Koyu arka plan */
+  border-radius: 6px; /* Köşe yuvarlaklığı */
+  padding: 4px 8px; /* İç padding */
+}
+
+/* Para birimi metni stilleri */
+.currency-text {
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 12px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+}
+
+/* Özet bölümü stilleri */
+.summary-section {
+  border-top: 1px solid #3a3b47; /* Üst kenarlık */
+  padding-top: 20px; /* Üst padding */
+}
+
+/* Özet başlığı stilleri */
+.summary-title {
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 16px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+  margin: 0 0 16px 0; /* Margin */
+}
+
+/* Özet öğesi stilleri */
+.summary-item {
+  display: flex; /* Flex layout */
+  justify-content: space-between; /* İki uca yasla */
+  align-items: center; /* Dikey hizalama */
+  margin-bottom: 12px; /* Alt margin */
+}
+
+/* Son özet öğesi için margin kaldır */
+.summary-item:last-child {
+  margin-bottom: 0; /* Alt margin kaldır */
+}
+
+/* Özet etiketi stilleri */
+.summary-label {
+  color: #9ca3af; /* Gri metin rengi */
+  font-size: 14px; /* Font boyutu */
+  font-weight: 500; /* Font kalınlığı */
+}
+
+/* Özet değeri stilleri */
+.summary-value {
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 14px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+}
+
+/* Responsive tasarım */
+@media (max-width: 768px) {
+  .staking-activation-container {
+    padding: 16px; /* Mobilde padding azalt */
+  }
+  
+  .activation-header {
+    flex-direction: column; /* Dikey layout */
+    gap: 12px; /* Elementler arası boşluk */
+    align-items: flex-start; /* Sol hizalama */
+  }
+  
+  .form-select {
+    font-size: 14px; /* Font boyutunu azalt */
+    padding: 10px 36px 10px 36px; /* Padding'i azalt */
+  }
+  
+  .amount-input {
+    font-size: 14px; /* Font boyutunu azalt */
+    padding: 10px 56px 10px 14px; /* Padding'i azalt */
+  }
+  
+  .select-icon,
+  .dropdown-arrow {
+    width: 16px; /* İkon boyutunu azalt */
+    height: 16px; /* İkon boyutunu azalt */
+  }
+  
+  .summary-item {
+    flex-direction: column; /* Dikey layout */
+    align-items: flex-start; /* Sol hizalama */
+    gap: 4px; /* Elementler arası boşluk */
+  }
+}

@@ -1,0 +1,33 @@
+/* Staking Offerings ana container stilleri */
+.staking-offerings-container {
+  background-color: #252730; /* Koyu arka plan rengi */
+  border-radius: 12px; /* Köşe yuvarlaklığı */
+  padding: 24px; /* İç padding */
+  border: 1px solid #3a3b47; /* Kenarlık */
+}
+
+/* Staking grid layout stilleri */
+.staking-grid {
+  display: grid; /* Grid layout */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid kolonları */
+  gap: 16px; /* Grid elementleri arası boşluk */
+}
+
+/* Responsive tasarım */
+@media (max-width: 768px) {
+  .staking-offerings-container {
+    padding: 16px; /* Mobilde padding azalt */
+  }
+  
+  .staking-grid {
+    grid-template-columns: 1fr; /* Mobilde tek kolon */
+    gap: 12px; /* Boşluğu azalt */
+  }
+}
+
+@media (max-width: 480px) {
+  .staking-offerings-container {
+    padding: 12px; /* Çok küçük ekranlarda padding daha da azalt */
+    border-radius: 8px; /* Köşe yuvarlaklığını azalt */
+  }
+}

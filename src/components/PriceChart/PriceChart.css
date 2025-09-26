@@ -1,0 +1,174 @@
+/* Fiyat grafiği ana container stilleri */
+.price-chart-container {
+  background-color: #252730; /* Koyu arka plan rengi */
+  border-radius: 12px; /* Köşe yuvarlaklığı */
+  padding: 24px; /* İç padding */
+  border: 1px solid #3a3b47; /* Kenarlık */
+  height: fit-content; /* İçeriğe göre yükseklik */
+}
+
+/* Grafik başlığı stilleri */
+.chart-header {
+  display: flex; /* Flex layout */
+  justify-content: space-between; /* İki uca yasla */
+  align-items: center; /* Dikey hizalama */
+  margin-bottom: 24px; /* Alt margin */
+}
+
+/* Başlık bölümü stilleri */
+.chart-title-section {
+  display: flex; /* Flex layout */
+  flex-direction: column; /* Dikey yönlendirme */
+  gap: 4px; /* Elementler arası boşluk */
+}
+
+/* Ana başlık stilleri */
+.chart-title {
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 24px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+  margin: 0; /* Margin sıfırla */
+}
+
+/* Alt başlık stilleri */
+.chart-subtitle {
+  color: #9ca3af; /* Gri metin rengi */
+  font-size: 14px; /* Font boyutu */
+  font-weight: 500; /* Font kalınlığı */
+}
+
+/* Zaman aralığı butonları container */
+.time-range-buttons {
+  display: flex; /* Flex layout */
+  gap: 8px; /* Butonlar arası boşluk */
+  background-color: #1a1b23; /* Koyu arka plan */
+  border-radius: 8px; /* Köşe yuvarlaklığı */
+  padding: 4px; /* İç padding */
+}
+
+/* Zaman butonu stilleri */
+.time-btn {
+  background: transparent; /* Şeffaf arka plan */
+  border: none; /* Kenarlık yok */
+  color: #9ca3af; /* Gri metin rengi */
+  padding: 8px 12px; /* İç padding */
+  border-radius: 6px; /* Köşe yuvarlaklığı */
+  font-size: 12px; /* Font boyutu */
+  font-weight: 500; /* Font kalınlığı */
+  cursor: pointer; /* İmleç pointer */
+  transition: all 0.2s ease; /* Geçiş animasyonu */
+}
+
+/* Zaman butonu hover durumu */
+.time-btn:hover {
+  color: #ffffff; /* Beyaz metin rengi */
+  background-color: #3a3b47; /* Hover arka plan rengi */
+}
+
+/* Aktif zaman butonu stilleri */
+.time-btn.active {
+  background-color: #4f8ff7; /* Mavi arka plan */
+  color: #ffffff; /* Beyaz metin rengi */
+}
+
+/* Ana grafik container stilleri */
+.main-chart {
+  margin-bottom: 16px; /* Alt margin */
+  border-radius: 8px; /* Köşe yuvarlaklığı */
+  overflow: hidden; /* Taşan içeriği gizle */
+}
+
+/* Hacim grafiği container stilleri */
+.volume-chart {
+  margin-bottom: 20px; /* Alt margin */
+  border-radius: 8px; /* Köşe yuvarlaklığı */
+  overflow: hidden; /* Taşan içeriği gizle */
+}
+
+/* Grafik istatistikleri container */
+.chart-stats {
+  display: flex; /* Flex layout */
+  justify-content: space-between; /* Eşit dağıtım */
+  gap: 16px; /* Elementler arası boşluk */
+  padding-top: 16px; /* Üst padding */
+  border-top: 1px solid #3a3b47; /* Üst kenarlık */
+}
+
+/* İstatistik öğesi stilleri */
+.stat-item {
+  display: flex; /* Flex layout */
+  flex-direction: column; /* Dikey yönlendirme */
+  gap: 4px; /* Elementler arası boşluk */
+  text-align: center; /* Metni ortala */
+  flex: 1; /* Eşit genişlik */
+}
+
+/* İstatistik etiketi stilleri */
+.stat-label {
+  color: #9ca3af; /* Gri metin rengi */
+  font-size: 12px; /* Font boyutu */
+  font-weight: 500; /* Font kalınlığı */
+}
+
+/* İstatistik değeri stilleri */
+.stat-value {
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 14px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+}
+
+/* Pozitif değer stilleri */
+.stat-value.positive {
+  color: #22c55e; /* Yeşil metin rengi */
+}
+
+/* Negatif değer stilleri */
+.stat-value.negative {
+  color: #ef4444; /* Kırmızı metin rengi */
+}
+
+/* Responsive tasarım */
+@media (max-width: 768px) {
+  .price-chart-container {
+    padding: 16px; /* Mobilde padding azalt */
+  }
+  
+  .chart-header {
+    flex-direction: column; /* Dikey layout */
+    gap: 16px; /* Elementler arası boşluk */
+    align-items: flex-start; /* Sol hizalama */
+  }
+  
+  .chart-title {
+    font-size: 20px; /* Font boyutunu azalt */
+  }
+  
+  .time-range-buttons {
+    width: 100%; /* Tam genişlik */
+    justify-content: space-between; /* Eşit dağıtım */
+  }
+  
+  .chart-stats {
+    flex-direction: column; /* Dikey layout */
+    gap: 12px; /* Boşluğu azalt */
+  }
+  
+  .stat-item {
+    text-align: left; /* Sol hizalama */
+  }
+}
+
+@media (max-width: 480px) {
+  .main-chart {
+    height: 200px; /* Grafik yüksekliğini azalt */
+  }
+  
+  .volume-chart {
+    height: 60px; /* Hacim grafiği yüksekliğini azalt */
+  }
+  
+  .time-btn {
+    padding: 6px 8px; /* Buton padding'ini azalt */
+    font-size: 11px; /* Font boyutunu azalt */
+  }
+}

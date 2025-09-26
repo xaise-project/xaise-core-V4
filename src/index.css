@@ -1,0 +1,36 @@
+/* Tailwind CSS direktifleri */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global stiller */
+* {
+  margin: 0; /* Tüm elementlerin margin değerini sıfırla */
+  padding: 0; /* Tüm elementlerin padding değerini sıfırla */
+  box-sizing: border-box; /* Box model hesaplamasını border-box yap */
+}
+
+body {
+  font-family: 'Inter', sans-serif; /* Ana font ailesini Inter olarak ayarla */
+  background-color: #1a1b23; /* Koyu arka plan rengi */
+  color: #ffffff; /* Beyaz metin rengi */
+  overflow-x: hidden; /* Yatay scroll'u gizle */
+}
+
+/* Scrollbar stilleri */
+::-webkit-scrollbar {
+  width: 6px; /* Scrollbar genişliği */
+}
+
+::-webkit-scrollbar-track {
+  background: #252730; /* Scrollbar track rengi */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4f8ff7; /* Scrollbar thumb rengi */
+  border-radius: 3px; /* Scrollbar thumb köşe yuvarlaklığı */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6; /* Hover durumunda scrollbar thumb rengi */
+}

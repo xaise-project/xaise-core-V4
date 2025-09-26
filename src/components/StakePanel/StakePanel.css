@@ -1,0 +1,23 @@
+/* Stake Panel ana container stilleri */
+.stake-panel-container {
+  display: flex; /* Flex layout */
+  flex-direction: column; /* Dikey yönlendirme */
+  gap: 0; /* Bileşenler arası boşluk (her bileşen kendi margin'ini yönetir) */
+  width: 100%; /* Tam genişlik */
+  max-width: 400px; /* Maksimum genişlik */
+  height: fit-content; /* İçeriğe göre yükseklik */
+}
+
+/* Responsive tasarım */
+@media (max-width: 1200px) {
+  .stake-panel-container {
+    max-width: 100%; /* Tam genişlik */
+  }
+}
+
+@media (max-width: 768px) {
+  .stake-panel-container {
+    max-width: 100%; /* Tam genişlik */
+    gap: 16px; /* Mobilde bileşenler arası boşluk */
+  }
+}

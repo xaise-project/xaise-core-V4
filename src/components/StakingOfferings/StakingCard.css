@@ -1,0 +1,189 @@
+/* Staking Card ana container stilleri */
+.staking-card {
+  background-color: #1a1b23; /* Koyu arka plan rengi */
+  border: 1px solid #3a3b47; /* Kenarlık */
+  border-radius: 12px; /* Köşe yuvarlaklığı */
+  padding: 20px; /* İç padding */
+  transition: all 0.3s ease; /* Geçiş animasyonu */
+  cursor: pointer; /* İmleç pointer */
+  position: relative; /* Relative pozisyon */
+  overflow: hidden; /* Taşan içeriği gizle */
+}
+
+/* Kart hover durumu */
+.staking-card:hover {
+  border-color: #4f8ff7; /* Hover kenarlık rengi */
+  transform: translateY(-2px); /* Hafif yukarı hareket */
+  box-shadow: 0 8px 25px rgba(79, 143, 247, 0.15); /* Gölge efekti */
+}
+
+/* Kart başlığı stilleri */
+.card-header {
+  display: flex; /* Flex layout */
+  justify-content: space-between; /* İki uca yasla */
+  align-items: center; /* Dikey hizalama */
+  margin-bottom: 20px; /* Alt margin */
+}
+
+/* Kripto para bilgileri container */
+.crypto-info {
+  display: flex; /* Flex layout */
+  align-items: center; /* Dikey hizalama */
+  gap: 12px; /* Elementler arası boşluk */
+}
+
+/* Kripto para logosu stilleri */
+.crypto-logo {
+  width: 40px; /* Logo genişliği */
+  height: 40px; /* Logo yüksekliği */
+  border-radius: 50%; /* Yuvarlak logo */
+  display: flex; /* Flex layout */
+  align-items: center; /* Dikey hizalama */
+  justify-content: center; /* Yatay hizalama */
+  color: white; /* Metin rengi */
+  font-weight: 600; /* Font kalınlığı */
+  font-size: 16px; /* Font boyutu */
+  overflow: hidden; /* Taşan içeriği gizle */
+}
+
+/* Logo resmi stilleri */
+.logo-image {
+  width: 24px; /* Resim genişliği */
+  height: 24px; /* Resim yüksekliği */
+  object-fit: contain; /* Resmi sığdır */
+}
+
+/* Kripto para detayları container */
+.crypto-details {
+  display: flex; /* Flex layout */
+  flex-direction: column; /* Dikey yönlendirme */
+  gap: 2px; /* Elementler arası boşluk */
+}
+
+/* Kripto para adı stilleri */
+.crypto-name {
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 16px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+  margin: 0; /* Margin sıfırla */
+}
+
+/* Kripto para sembolü stilleri */
+.crypto-symbol {
+  color: #9ca3af; /* Gri metin rengi */
+  font-size: 14px; /* Font boyutu */
+  font-weight: 500; /* Font kalınlığı */
+}
+
+/* APY badge stilleri */
+.apy-badge {
+  background-color: #252730; /* Koyu arka plan */
+  border: 1px solid #3a3b47; /* Kenarlık */
+  border-radius: 20px; /* Köşe yuvarlaklığı */
+  padding: 6px 12px; /* İç padding */
+  display: flex; /* Flex layout */
+  align-items: center; /* Dikey hizalama */
+  gap: 6px; /* Elementler arası boşluk */
+}
+
+/* APY etiketi stilleri */
+.apy-label {
+  color: #9ca3af; /* Gri metin rengi */
+  font-size: 12px; /* Font boyutu */
+  font-weight: 500; /* Font kalınlığı */
+}
+
+/* APY değeri stilleri */
+.apy-value {
+  color: #22c55e; /* Yeşil metin rengi */
+  font-size: 12px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+}
+
+/* Kart içeriği stilleri */
+.card-content {
+  margin-bottom: 20px; /* Alt margin */
+}
+
+/* Yıllık getiri container stilleri */
+.annual-yield {
+  display: flex; /* Flex layout */
+  justify-content: space-between; /* İki uca yasla */
+  align-items: center; /* Dikey hizalama */
+  margin-bottom: 12px; /* Alt margin */
+}
+
+/* Getiri etiketi stilleri */
+.yield-label {
+  color: #9ca3af; /* Gri metin rengi */
+  font-size: 14px; /* Font boyutu */
+  font-weight: 500; /* Font kalınlığı */
+}
+
+/* Getiri değeri stilleri */
+.yield-value {
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 18px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+}
+
+/* Minimum stake bilgisi container */
+.min-stake-info {
+  display: flex; /* Flex layout */
+  justify-content: space-between; /* İki uca yasla */
+  align-items: center; /* Dikey hizalama */
+}
+
+/* Minimum stake etiketi stilleri */
+.min-stake-label {
+  color: #9ca3af; /* Gri metin rengi */
+  font-size: 14px; /* Font boyutu */
+  font-weight: 500; /* Font kalınlığı */
+}
+
+/* Minimum stake değeri stilleri */
+.min-stake-value {
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 14px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+}
+
+/* Stake Now butonu stilleri */
+.stake-now-btn {
+  width: 100%; /* Tam genişlik */
+  background-color: #4f8ff7; /* Mavi arka plan */
+  border: none; /* Kenarlık yok */
+  border-radius: 8px; /* Köşe yuvarlaklığı */
+  padding: 12px; /* İç padding */
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 14px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+  cursor: pointer; /* İmleç pointer */
+  transition: all 0.2s ease; /* Geçiş animasyonu */
+}
+
+/* Stake Now butonu hover durumu */
+.stake-now-btn:hover {
+  background-color: #3b82f6; /* Hover arka plan rengi */
+  transform: translateY(-1px); /* Hafif yukarı hareket */
+}
+
+/* Stake Now butonu active durumu */
+.stake-now-btn:active {
+  transform: translateY(0); /* Normal pozisyona dön */
+}
+
+/* Responsive tasarım */
+@media (max-width: 480px) {
+  .staking-card {
+    padding: 16px; /* Mobilde padding azalt */
+  }
+  
+  .crypto-name {
+    font-size: 14px; /* Font boyutunu azalt */
+  }
+  
+  .yield-value {
+    font-size: 16px; /* Font boyutunu azalt */
+  }
+}
