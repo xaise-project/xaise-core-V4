@@ -13,4 +13,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="header-content">
           <h1 className="header-title">StakeHub</h1>
           <nav className="header-nav">
-            <span className="nav-placeholder
+            <span className="nav-placeholder">Nav items here</span>
+          </nav>
+        </div>
+      </header>
+
+      {/* Main content area */}
+      <main className="layout-main">{children}</main>
+
+      {/* Footer placeholder */}
+      <footer className="layout-footer">
+        <p className="footer-text">© 2024 StakeHub</p>
+      </footer>
+    </div>
+  )
+}
