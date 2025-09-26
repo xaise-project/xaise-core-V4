@@ -1,9 +1,9 @@
 # xaise-core-V4
 Özerk Kripto Karar Motoru MVP
 
-# 📊 Market Flow Dashboard
+# 🚀 StakeHub - Modern Staking Dashboard
 
-Modern ve interaktif kripto para piyasa analiz dashboard'u. Gerçek zamanlı fiyat grafikleri, staking fırsatları ve piyasa istatistikleri ile kapsamlı bir DeFi deneyimi sunar.
+Kullanıcıların staking protokollerini kolayca takip edebileceği, stake işlemlerini yönetebileceği ve rewards'larını izleyebileceği modern bir web platformu. Gerçek zamanlı APY verilerini göstererek basit stake yönetimi sağlar.
 
 ![Dashboard Preview](https://img.shields.io/badge/Status-Active-brightgreen)
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)
@@ -19,13 +19,14 @@ Modern ve interaktif kripto para piyasa analiz dashboard'u. Gerçek zamanlı fiy
 
 ### Styling & UI
 - **Tailwind CSS 3.3.3** - Utility-first CSS framework
-- **Custom CSS** - Özel stil dosyaları
+- **Modern Dark Theme** - Koyu tema tasarım
 - **Lucide React 0.263.1** - Modern ikon kütüphanesi
 
-### Grafik & Görselleştirme
-- **Recharts 2.8.0** - React grafik kütüphanesi
-- **SVG Graphics** - Özel SVG grafik implementasyonu
-- **CSS Animations** - Smooth geçiş efektleri
+### Backend & Database
+- **Supabase** - Backend-as-a-Service platform
+- **PostgreSQL** - İlişkisel veritabanı
+- **Supabase Auth** - Kullanıcı kimlik doğrulama
+- **Real-time Subscriptions** - Gerçek zamanlı veri güncellemeleri
 
 ### Geliştirme Araçları
 - **ESLint** - Kod kalitesi kontrolü
@@ -37,13 +38,14 @@ Modern ve interaktif kripto para piyasa analiz dashboard'u. Gerçek zamanlı fiy
 ### Gereksinimler
 - Node.js 16.0.0 veya üzeri
 - npm veya yarn paket yöneticisi
+- Supabase hesabı (backend servisleri için)
 
 ### Adım Adım Kurulum
 
 1. **Projeyi klonlayın**
 ```bash
-git clone https://github.com/xaise-project/market-flow-dashboard.git
-cd market-flow-dashboard
+git clone https://github.com/xaise-project/stakehub-dashboard.git
+cd stakehub-dashboard
 ```
 
 2. **Bağımlılıkları yükleyin**
@@ -53,12 +55,41 @@ npm install
 yarn install
 ```
 
-3. **Geliştirme sunucusunu başlatın**
+3. **Environment variables ayarlayın**
+```bash
+cp .env.example .env.local
+# .env.local dosyasında Supabase bilgilerinizi güncelleyin
+```
+
+4. **Geliştirme sunucusunu başlatın**
 ```bash
 npm run dev
 # veya
 yarn dev
 ```
+
+## ✨ Özellikler
+
+### 🎯 Temel Özellikler
+- **Dashboard**: Staking protokolleri listesi ve gerçek zamanlı APY verileri
+- **Stake Management**: Token seçimi, miktar girişi ve staking activation
+- **Rewards Tracking**: Kullanıcı rewards'ları ve claim işlemleri
+- **Protokol Detayları**: APY grafikleri ve performans metrikleri
+- **Kullanıcı Yönetimi**: Email ile kayıt/giriş sistemi
+
+### 🔧 Desteklenen Protokoller
+- **Cardano (ADA)** - %4.2 APY
+- **Ontology (ONT)** - %5.8 APY
+- **Solana (SOL)** - %6.5 APY
+- **Polkadot (DOT)** - %12.0 APY
+- **XRP Ledger** - %3.8 APY
+
+### 🎨 UI/UX Özellikleri
+- Modern dark theme tasarım
+- Responsive design (desktop-first)
+- Smooth animations ve transitions
+- Intuitive navigation
+- Real-time data updates
 
 ## 🔧 Geliştirme Komutları
 
