@@ -1,6 +1,6 @@
 /* Fiyat grafiği ana container stilleri */
 .price-chart-container {
-  background-color: #252730; /* Koyu arka plan rengi */
+  background-color: #000000; /* Tam siyah arka plan rengi */
   border-radius: 12px; /* Köşe yuvarlaklığı */
   padding: 24px; /* İç padding */
   border: 1px solid #3a3b47; /* Kenarlık */
@@ -41,7 +41,7 @@
 .time-range-buttons {
   display: flex; /* Flex layout */
   gap: 8px; /* Butonlar arası boşluk */
-  background-color: #1a1b23; /* Koyu arka plan */
+  background-color: #000000; /* Tam siyah arka plan */
   border-radius: 8px; /* Köşe yuvarlaklığı */
   padding: 4px; /* İç padding */
 }
@@ -62,7 +62,7 @@
 /* Zaman butonu hover durumu */
 .time-btn:hover {
   color: #ffffff; /* Beyaz metin rengi */
-  background-color: #3a3b47; /* Hover arka plan rengi */
+  background-color: #000000; /* Tam siyah hover arka plan rengi */
 }
 
 /* Aktif zaman butonu stilleri */
@@ -99,8 +99,7 @@
   display: flex; /* Flex layout */
   flex-direction: column; /* Dikey yönlendirme */
   gap: 4px; /* Elementler arası boşluk */
-  text-align: center; /* Metni ortala */
-  flex: 1; /* Eşit genişlik */
+  text-align: center; /* Orta hizalama */
 }
 
 /* İstatistik etiketi stilleri */
@@ -113,7 +112,7 @@
 /* İstatistik değeri stilleri */
 .stat-value {
   color: #ffffff; /* Beyaz metin rengi */
-  font-size: 14px; /* Font boyutu */
+  font-size: 16px; /* Font boyutu */
   font-weight: 600; /* Font kalınlığı */
 }
 
@@ -124,7 +123,29 @@
 
 /* Negatif değer stilleri */
 .stat-value.negative {
-  color: #ef4444; /* Kırmızı metin rengi */
+  color: #dc2626; /* Kırmızı metin rengi */
+}
+
+/* Grafik loading durumu stilleri */
+.chart-loading {
+  display: flex; /* Flex layout */
+  align-items: center; /* Dikey hizalama */
+  justify-content: center; /* Yatay hizalama */
+  height: 300px; /* Sabit yükseklik */
+  color: #9ca3af; /* Gri metin rengi */
+  font-size: 14px; /* Font boyutu */
+  font-weight: 500; /* Font kalınlığı */
+}
+
+/* Grafik hata durumu stilleri */
+.chart-error {
+  display: flex; /* Flex layout */
+  align-items: center; /* Dikey hizalama */
+  justify-content: center; /* Yatay hizalama */
+  height: 300px; /* Sabit yükseklik */
+  color: #dc2626; /* Kırmızı metin rengi */
+  font-size: 14px; /* Font boyutu */
+  font-weight: 500; /* Font kalınlığı */
 }
 
 /* Responsive tasarım */
@@ -145,7 +166,14 @@
   
   .time-range-buttons {
     width: 100%; /* Tam genişlik */
-    justify-content: space-between; /* Eşit dağıtım */
+    justify-content: space-between; /* Eşit dağılım */
+  }
+  
+  .time-btn {
+    flex: 1; /* Eşit genişlik */
+    text-align: center; /* Orta hizalama */
+    padding: 6px 8px; /* Padding'i azalt */
+    font-size: 11px; /* Font boyutunu azalt */
   }
   
   .chart-stats {
@@ -154,7 +182,13 @@
   }
   
   .stat-item {
+    flex-direction: row; /* Yatay layout */
+    justify-content: space-between; /* İki uca yasla */
     text-align: left; /* Sol hizalama */
+  }
+  
+  .stat-value {
+    font-size: 14px; /* Font boyutunu azalt */
   }
 }
 

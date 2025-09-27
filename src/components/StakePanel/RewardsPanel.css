@@ -1,6 +1,6 @@
 /* Rewards Panel ana container stilleri */
 .rewards-panel-container {
-  background-color: #252730; /* Koyu arka plan rengi */
+  background-color: #000000; /* Tam siyah arka plan rengi */
   border-radius: 12px; /* Köşe yuvarlaklığı */
   padding: 24px; /* İç padding */
   border: 1px solid #3a3b47; /* Kenarlık */
@@ -53,7 +53,7 @@
   align-items: center; /* Dikey hizalama */
   gap: 12px; /* Elementler arası boşluk */
   padding: 12px; /* İç padding */
-  background-color: #1a1b23; /* Koyu arka plan */
+  background-color: #000000; /* Tam siyah arka plan */
   border-radius: 8px; /* Köşe yuvarlaklığı */
   border: 1px solid #3a3b47; /* Kenarlık */
   transition: all 0.2s ease; /* Geçiş animasyonu */
@@ -61,7 +61,7 @@
 
 /* Reward öğesi hover durumu */
 .reward-item:hover {
-  background-color: #2a2b37; /* Hover arka plan rengi */
+  background-color: #000000; /* Tam siyah hover arka plan rengi */
   border-color: #4f8ff7; /* Hover kenarlık rengi */
 }
 
@@ -102,28 +102,29 @@
   width: 20px; /* Daire genişliği */
   height: 20px; /* Daire yüksekliği */
   background-color: #ffffff; /* Beyaz arka plan */
-  border-radius: 50%; /* Yuvarlak daire */
+  border-radius: 50%; /* Tam yuvarlak */
   display: flex; /* Flex layout */
   align-items: center; /* Dikey hizalama */
   justify-content: center; /* Yatay hizalama */
-  color: #2563eb; /* Mavi metin rengi */
-  font-size: 12px; /* Font boyutu */
+  font-size: 10px; /* Font boyutu */
   font-weight: 700; /* Font kalınlığı */
+  color: #2563eb; /* Mavi metin rengi */
 }
 
-/* Reward detayları stilleri */
-.reward-details {
-  flex: 1; /* Esnek genişlik */
+/* Reward bilgileri container stilleri */
+.reward-info {
+  flex: 1; /* Kalan alanı kapla */
   display: flex; /* Flex layout */
   flex-direction: column; /* Dikey yönlendirme */
   gap: 4px; /* Elementler arası boşluk */
 }
 
-/* Reward miktarı stilleri */
-.reward-amount {
+/* Reward başlığı stilleri */
+.reward-name {
   color: #ffffff; /* Beyaz metin rengi */
   font-size: 14px; /* Font boyutu */
   font-weight: 600; /* Font kalınlığı */
+  margin: 0; /* Margin sıfırla */
 }
 
 /* Reward açıklaması stilleri */
@@ -131,34 +132,65 @@
   color: #9ca3af; /* Gri metin rengi */
   font-size: 12px; /* Font boyutu */
   font-weight: 500; /* Font kalınlığı */
+  margin: 0; /* Margin sıfırla */
 }
 
-/* Reward zamanı stilleri */
-.reward-time {
+/* Reward değeri container stilleri */
+.reward-value {
   display: flex; /* Flex layout */
-  align-items: center; /* Dikey hizalama */
-  gap: 4px; /* İkon ve metin arası boşluk */
-  flex-shrink: 0; /* Küçülmeyi engelle */
+  flex-direction: column; /* Dikey yönlendirme */
+  align-items: flex-end; /* Sağa hizala */
+  gap: 2px; /* Elementler arası boşluk */
 }
 
-/* Zaman ikonu stilleri */
-.time-icon {
-  width: 14px; /* İkon genişliği */
-  height: 14px; /* İkon yüksekliği */
-  color: #9ca3af; /* Gri ikon rengi */
+/* Reward miktarı stilleri */
+.reward-amount {
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 14px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+  margin: 0; /* Margin sıfırla */
 }
 
-/* Zaman metni stilleri */
-.time-text {
+/* Reward USD değeri stilleri */
+.reward-usd {
   color: #9ca3af; /* Gri metin rengi */
   font-size: 12px; /* Font boyutu */
   font-weight: 500; /* Font kalınlığı */
+  margin: 0; /* Margin sıfırla */
+}
+
+/* Claim butonu stilleri */
+.claim-button {
+  background-color: #22c55e; /* Yeşil arka plan */
+  border: none; /* Kenarlık yok */
+  border-radius: 6px; /* Köşe yuvarlaklığı */
+  padding: 8px 16px; /* İç padding */
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 12px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+  cursor: pointer; /* İmleç pointer */
+  transition: all 0.2s ease; /* Geçiş animasyonu */
+  flex-shrink: 0; /* Küçülmeyi engelle */
+}
+
+/* Claim butonu hover durumu */
+.claim-button:hover {
+  background-color: #16a34a; /* Hover arka plan rengi */
+  transform: translateY(-1px); /* Hafif yukarı hareket */
+}
+
+/* Claim butonu disabled durumu */
+.claim-button:disabled {
+  background-color: #6b7280; /* Disabled arka plan rengi */
+  cursor: not-allowed; /* İmleç not-allowed */
+  transform: none; /* Transform yok */
 }
 
 /* Responsive tasarım */
 @media (max-width: 768px) {
   .rewards-panel-container {
     padding: 16px; /* Mobilde padding azalt */
+    margin-bottom: 16px; /* Mobilde margin azalt */
   }
   
   .rewards-header {
@@ -173,27 +205,39 @@
   }
   
   .reward-icon {
-    width: 36px; /* İkon boyutunu azalt */
-    height: 36px; /* İkon boyutunu azalt */
+    width: 32px; /* İkon boyutunu azalt */
+    height: 32px; /* İkon boyutunu azalt */
   }
   
   .icon {
-    width: 18px; /* İkon boyutunu azalt */
-    height: 18px; /* İkon boyutunu azalt */
+    width: 16px; /* İkon boyutunu azalt */
+    height: 16px; /* İkon boyutunu azalt */
   }
   
   .usdc-circle {
-    width: 18px; /* Daire boyutunu azalt */
-    height: 18px; /* Daire boyutunu azalt */
-    font-size: 10px; /* Font boyutunu azalt */
+    width: 16px; /* Daire boyutunu azalt */
+    height: 16px; /* Daire boyutunu azalt */
+    font-size: 8px; /* Font boyutunu azalt */
+  }
+  
+  .reward-name {
+    font-size: 13px; /* Font boyutunu azalt */
+  }
+  
+  .reward-description {
+    font-size: 11px; /* Font boyutunu azalt */
   }
   
   .reward-amount {
     font-size: 13px; /* Font boyutunu azalt */
   }
   
-  .reward-description,
-  .time-text {
+  .reward-usd {
+    font-size: 11px; /* Font boyutunu azalt */
+  }
+  
+  .claim-button {
+    padding: 6px 12px; /* Padding'i azalt */
     font-size: 11px; /* Font boyutunu azalt */
   }
 }

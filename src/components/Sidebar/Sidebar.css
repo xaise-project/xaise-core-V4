@@ -1,7 +1,7 @@
 /* Sidebar ana container stilleri */
 .sidebar-container {
   width: 240px; /* Sidebar genişliği */
-  background-color: #252730; /* Koyu arka plan rengi */
+  background-color: #000000; /* Tam siyah arka plan rengi */
   border-right: 1px solid #3a3b47; /* Sağ kenarlık */
   display: flex; /* Flex layout */
   flex-direction: column; /* Dikey yönlendirme */

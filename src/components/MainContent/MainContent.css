@@ -3,7 +3,7 @@
   flex: 1; /* Kalan alanı kapla */
   display: flex; /* Flex layout */
   flex-direction: column; /* Dikey yönlendirme */
-  background-color: #1a1b23; /* Koyu arka plan rengi */
+  background-color: #000000; /* Tam siyah arka plan rengi */
   overflow-y: auto; /* Dikey scroll */
   min-height: 100vh; /* Minimum yükseklik */
 }

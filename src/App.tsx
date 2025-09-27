@@ -1,14 +1,22 @@
-import React from 'react' // React kütüphanesini import et
-import Sidebar from './components/Sidebar/Sidebar' // Sidebar bileşenini import et
-import MainContent from './components/MainContent/MainContent' // Ana içerik bileşenini import et
-import './App.css' // App CSS dosyasını import et
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Sidebar from './components/Sidebar/Sidebar'
+import MainContent from './components/MainContent/MainContent'
+import './App.css'
 
 function App() {
   return (
-    <div className="flex min-h-screen bg-dark-bg"> {/* Ana container - flex layout, minimum ekran yükseklik, koyu arka plan */}
-      <Sidebar /> {/* Sol sidebar bileşeni */}
-      <MainContent /> {/* Ana içerik alanı */}
-    </div>
+    <Router>
+      <div className="flex min-h-screen bg-dark-bg">
+        <Sidebar />
+        <Routes>
+          <Route path="/" element={<MainContent />} />
+          <Route path="/dashboard" element={<MainContent />} />
+          <Route path="/staking" element={<MainContent />} />
+          <Route path="/portfolio" element={<MainContent />} />
+          <Route path="/settings" element={<MainContent />} />
+        </Routes>
+      </div>
+    </Router>
   )
 }
 

@@ -1,6 +1,6 @@
 /* Interest Stats ana container stilleri */
 .interest-stats-container {
-  background-color: #252730; /* Koyu arka plan rengi */
+  background-color: #000000; /* Tam siyah arka plan rengi */
   border-radius: 12px; /* Köşe yuvarlaklığı */
   padding: 24px; /* İç padding */
   border: 1px solid #3a3b47; /* Kenarlık */
@@ -30,7 +30,7 @@
 
 /* Filtre butonu stilleri */
 .filter-button {
-  background-color: #1a1b23; /* Koyu arka plan */
+  background-color: #000000; /* Tam siyah arka plan */
   border: 1px solid #3a3b47; /* Kenarlık */
   border-radius: 6px; /* Köşe yuvarlaklığı */
   padding: 6px 12px; /* İç padding */
@@ -50,7 +50,7 @@
 
 /* Filtre butonu hover durumu */
 .filter-button:hover:not(.active) {
-  background-color: #2a2b37; /* Hover arka plan rengi */
+  background-color: #000000; /* Tam siyah hover arka plan rengi */
   border-color: #4f8ff7; /* Hover kenarlık rengi */
   color: #ffffff; /* Beyaz metin rengi */
 }
@@ -65,7 +65,7 @@
 
 /* İstatistik kartı stilleri */
 .stat-card {
-  background-color: #1a1b23; /* Koyu arka plan */
+  background-color: #000000; /* Tam siyah arka plan */
   border: 1px solid #3a3b47; /* Kenarlık */
   border-radius: 8px; /* Köşe yuvarlaklığı */
   padding: 16px; /* İç padding */
@@ -74,7 +74,7 @@
 
 /* İstatistik kartı hover durumu */
 .stat-card:hover {
-  background-color: #2a2b37; /* Hover arka plan rengi */
+  background-color: #000000; /* Tam siyah hover arka plan rengi */
   border-color: #4f8ff7; /* Hover kenarlık rengi */
 }
 
@@ -100,20 +100,21 @@
   gap: 4px; /* İkon ve metin arası boşluk */
   font-size: 10px; /* Font boyutu */
   font-weight: 600; /* Font kalınlığı */
-  padding: 2px 6px; /* İç padding */
-  border-radius: 4px; /* Köşe yuvarlaklığı */
 }
 
 /* Pozitif trend stilleri */
 .stat-trend.positive {
-  background-color: rgba(16, 185, 129, 0.1); /* Yeşil arka plan (şeffaf) */
-  color: #10b981; /* Yeşil metin rengi */
+  color: #22c55e; /* Yeşil metin rengi */
 }
 
 /* Negatif trend stilleri */
 .stat-trend.negative {
-  background-color: rgba(239, 68, 68, 0.1); /* Kırmızı arka plan (şeffaf) */
-  color: #ef4444; /* Kırmızı metin rengi */
+  color: #dc2626; /* Kırmızı metin rengi */
+}
+
+/* Nötr trend stilleri */
+.stat-trend.neutral {
+  color: #9ca3af; /* Gri metin rengi */
 }
 
 /* Trend ikonu stilleri */
@@ -122,50 +123,82 @@
   height: 12px; /* İkon yüksekliği */
 }
 
-/* Trend metni stilleri */
-.trend-text {
-  font-weight: 600; /* Font kalınlığı */
-}
-
 /* Stat değeri stilleri */
 .stat-value {
   color: #ffffff; /* Beyaz metin rengi */
-  font-size: 16px; /* Font boyutu */
+  font-size: 24px; /* Font boyutu */
   font-weight: 700; /* Font kalınlığı */
+  margin: 0; /* Margin sıfırla */
+}
+
+/* Stat alt metni stilleri */
+.stat-subtitle {
+  color: #9ca3af; /* Gri metin rengi */
+  font-size: 11px; /* Font boyutu */
+  font-weight: 500; /* Font kalınlığı */
+  margin-top: 4px; /* Üst margin */
 }
 
 /* Grafik container stilleri */
 .chart-container {
-  margin-top: 24px; /* Üst margin */
-}
-
-/* Grafik placeholder stilleri */
-.chart-placeholder {
-  background-color: #1a1b23; /* Koyu arka plan */
+  background-color: #000000; /* Tam siyah arka plan */
   border: 1px solid #3a3b47; /* Kenarlık */
   border-radius: 8px; /* Köşe yuvarlaklığı */
-  padding: 16px; /* İç padding */
-  margin-bottom: 12px; /* Alt margin */
+  padding: 20px; /* İç padding */
+  margin-bottom: 24px; /* Alt margin */
 }
 
-/* Grafik SVG stilleri */
-.chart-svg {
+/* Grafik başlığı stilleri */
+.chart-title {
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 16px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
+  margin: 0 0 16px 0; /* Margin */
+}
+
+/* Grafik wrapper stilleri */
+.chart-wrapper {
+  height: 200px; /* Grafik yüksekliği */
   width: 100%; /* Tam genişlik */
-  height: 120px; /* Sabit yükseklik */
 }
 
-/* Grafik etiketleri stilleri */
-.chart-labels {
+/* Detay listesi stilleri */
+.details-list {
   display: flex; /* Flex layout */
-  justify-content: space-between; /* Eşit dağılım */
-  padding: 0 16px; /* Yatay padding */
+  flex-direction: column; /* Dikey yönlendirme */
+  gap: 12px; /* Öğeler arası boşluk */
 }
 
-/* Grafik etiketi stilleri */
-.chart-label {
+/* Detay öğesi stilleri */
+.detail-item {
+  display: flex; /* Flex layout */
+  justify-content: space-between; /* İki uca yasla */
+  align-items: center; /* Dikey hizalama */
+  padding: 12px 16px; /* İç padding */
+  background-color: #000000; /* Tam siyah arka plan */
+  border: 1px solid #3a3b47; /* Kenarlık */
+  border-radius: 6px; /* Köşe yuvarlaklığı */
+  transition: all 0.2s ease; /* Geçiş animasyonu */
+}
+
+/* Detay öğesi hover durumu */
+.detail-item:hover {
+  background-color: #000000; /* Tam siyah hover arka plan rengi */
+  border-color: #4f8ff7; /* Hover kenarlık rengi */
+}
+
+/* Detay etiketi stilleri */
+.detail-label {
   color: #9ca3af; /* Gri metin rengi */
-  font-size: 12px; /* Font boyutu */
+  font-size: 14px; /* Font boyutu */
   font-weight: 500; /* Font kalınlığı */
+}
+
+/* Detay değeri stilleri */
+.detail-value {
+  color: #ffffff; /* Beyaz metin rengi */
+  font-size: 14px; /* Font boyutu */
+  font-weight: 600; /* Font kalınlığı */
 }
 
 /* Responsive tasarım */
@@ -180,35 +213,30 @@
     align-items: flex-start; /* Sol hizalama */
   }
   
-  .stats-cards {
-    grid-template-columns: 1fr; /* Tek sütun */
-    gap: 12px; /* Boşluğu azalt */
-  }
-  
-  .stat-card {
-    padding: 12px; /* Padding'i azalt */
-  }
-  
-  .stat-header {
-    flex-direction: column; /* Dikey layout */
-    align-items: flex-start; /* Sol hizalama */
-    gap: 8px; /* Elementler arası boşluk */
-  }
-  
-  .stat-value {
-    font-size: 14px; /* Font boyutunu azalt */
-  }
-  
-  .chart-placeholder {
-    padding: 12px; /* Padding'i azalt */
-  }
-  
-  .chart-svg {
-    height: 100px; /* Yüksekliği azalt */
+  .time-filter {
+    width: 100%; /* Tam genişlik */
+    justify-content: space-between; /* Eşit dağılım */
   }
   
   .filter-button {
-    padding: 4px 8px; /* Padding'i azalt */
-    font-size: 11px; /* Font boyutunu azalt */
+    flex: 1; /* Eşit genişlik */
+    text-align: center; /* Orta hizalama */
+  }
+  
+  .stats-cards {
+    grid-template-columns: 1fr; /* Tek sütun */
+    gap: 12px; /* Kartlar arası boşluk azalt */
+  }
+  
+  .stat-value {
+    font-size: 20px; /* Font boyutunu azalt */
+  }
+  
+  .chart-wrapper {
+    height: 150px; /* Grafik yüksekliğini azalt */
+  }
+  
+  .detail-item {
+    padding: 10px 12px; /* Padding'i azalt */
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react' // React kütüphanesini import et
-import { Home, Search, Users, Coins, Settings, User, Wallet } from 'lucide-react' // Lucide ikonlarını import et
+import { Home, Search, Coins, User } from 'lucide-react' // Lucide ikonlarını import et
 import './Sidebar.css' // Sidebar CSS dosyasını import et
 
 const Sidebar: React.FC = () => {
@@ -25,20 +25,8 @@ const Sidebar: React.FC = () => {
             <span className="nav-text">Pair Explore</span> {/* Navigasyon metni */}
           </li>
           <li className="nav-item"> {/* Navigasyon öğesi */}
-            <Users className="nav-icon" /> {/* Kullanıcılar ikonu */}
-            <span className="nav-text">Live New Pairs</span> {/* Navigasyon metni */}
-          </li>
-          <li className="nav-item"> {/* Navigasyon öğesi */}
             <Coins className="nav-icon" /> {/* Token ikonu */}
             <span className="nav-text">Token</span> {/* Navigasyon metni */}
-          </li>
-          <li className="nav-item"> {/* Navigasyon öğesi */}
-            <Settings className="nav-icon" /> {/* Ayarlar ikonu */}
-            <span className="nav-text">Token Creator</span> {/* Navigasyon metni */}
-          </li>
-          <li className="nav-item"> {/* Navigasyon öğesi */}
-            <Wallet className="nav-icon" /> {/* Cüzdan ikonu */}
-            <span className="nav-text">Wallet Info</span> {/* Navigasyon metni */}
           </li>
           <li className="nav-item"> {/* Navigasyon öğesi */}
             <User className="nav-icon" /> {/* Kullanıcı ikonu */}
