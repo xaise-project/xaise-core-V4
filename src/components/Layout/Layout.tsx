@@ -1,11 +1,11 @@
-import React from 'react'
+import { ReactNode } from 'react'
 import './Layout.css'
 
 interface LayoutProps {
-  children: React.ReactNode
+  children: ReactNode
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="layout-container">
       {/* Header placeholder */}
@@ -28,3 +28,5 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     </div>
   )
 }
+
+export default Layout
