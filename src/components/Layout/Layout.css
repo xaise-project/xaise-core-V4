@@ -10,7 +10,6 @@
 /* Header Styles */
 .layout-header {
   background-color: #000000;
-  border-bottom: 1px solid #333333;
   padding: 1rem 2rem;
   position: sticky;
   top: 0;
@@ -54,7 +53,6 @@
 /* Footer Styles */
 .layout-footer {
   background-color: #000000;
-  border-top: 1px solid #333333;
   padding: 1rem 2rem;
   text-align: center;
 }
