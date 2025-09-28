@@ -1,3 +1,4 @@
+import React from 'react'
 import './PriceChart.css'
 
 const PriceChart: React.FC = () => {

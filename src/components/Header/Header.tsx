@@ -12,12 +12,6 @@ const Header: React.FC = () => {
           className="w-10 h-10" // boyutu ayarlamak için
         />
         <h1 className="page-title">Staking Offerings</h1> {/* Sayfa başlığı */}
-        <button className="learn-more-btn">
-          {" "}
-          {/* Daha fazla öğren butonu */}
-          Learn More
-          <div className="learn-more-icon">?</div> {/* Soru işareti ikonu */}
-        </button>
       </div>
       {/* Sağ taraf - Arama ve kullanıcı kontrolleri */}
       <div className="header-right">

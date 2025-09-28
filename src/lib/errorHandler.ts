@@ -1,11 +1,23 @@
 import toast from 'react-hot-toast'
 
+// Type guard for error objects
+function isErrorWithMessage(error: unknown): error is { message: string } {
+  return typeof error === 'object' && error !== null && 'message' in error && typeof (error as { message: unknown }).message === 'string'
+}
+
+function isErrorWithStatus(error: unknown): error is { status: number } {
+  return typeof error === 'object' && error !== null && 'status' in error && typeof (error as { status: unknown }).status === 'number'
+}
+
+function isErrorWithCode(error: unknown): error is { code: string } {
+  return typeof error === 'object' && error !== null && 'code' in error && typeof (error as { code: unknown }).code === 'string'
+}
 
 // Hata türleri
 export interface AppError {
   message: string
   code?: string
-  details?: any
+  details?: Record<string, unknown>
   timestamp: Date
   userId?: string
 }
@@ -29,37 +41,37 @@ export enum ErrorSeverity {
 }
 
 // Hata kategorisini belirle
-function categorizeError(error: any): ErrorCategory {
-  const message = error?.message?.toLowerCase() || ''
-  const code = error?.code?.toLowerCase() || ''
+function categorizeError(error: unknown): ErrorCategory {
+  const message = isErrorWithMessage(error) ? error.message.toLowerCase() : ''
+  const code = isErrorWithCode(error) ? error.code.toLowerCase() : ''
 
   // Authentication hataları
   if (message.includes('auth') || message.includes('login') || message.includes('unauthorized') ||
-      code.includes('auth') || error?.status === 401) {
+      code.includes('auth') || (isErrorWithStatus(error) && error.status === 401)) {
     return ErrorCategory.AUTHENTICATION
   }
 
   // Database hataları
   if (message.includes('database') || message.includes('sql') || message.includes('supabase') ||
-      code.includes('pgrst') || code.includes('23') || error?.status === 409) {
+      code.includes('pgrst') || code.includes('23') || (isErrorWithStatus(error) && error.status === 409)) {
     return ErrorCategory.DATABASE
   }
 
   // Network hataları
   if (message.includes('network') || message.includes('fetch') || message.includes('connection') ||
-      error?.status >= 500 || error?.name === 'NetworkError') {
+      (isErrorWithStatus(error) && error.status >= 500) || (error instanceof Error && error.name === 'NetworkError')) {
     return ErrorCategory.NETWORK
   }
 
   // Validation hataları
   if (message.includes('validation') || message.includes('invalid') || message.includes('required') ||
-      error?.status === 400 || error?.status === 422) {
+      (isErrorWithStatus(error) && (error.status === 400 || error.status === 422))) {
     return ErrorCategory.VALIDATION
   }
 
   // Permission hataları
   if (message.includes('permission') || message.includes('forbidden') || message.includes('access') ||
-      error?.status === 403) {
+      (isErrorWithStatus(error) && error.status === 403)) {
     return ErrorCategory.PERMISSION
   }
 
@@ -67,12 +79,12 @@ function categorizeError(error: any): ErrorCategory {
 }
 
 // Hata seviyesini belirle
-function determineSeverity(category: ErrorCategory, error: any): ErrorSeverity {
+function determineSeverity(category: ErrorCategory, error: unknown): ErrorSeverity {
   switch (category) {
     case ErrorCategory.AUTHENTICATION:
       return ErrorSeverity.HIGH
     case ErrorCategory.DATABASE:
-      return error?.status >= 500 ? ErrorSeverity.CRITICAL : ErrorSeverity.MEDIUM
+      return isErrorWithStatus(error) && error.status >= 500 ? ErrorSeverity.CRITICAL : ErrorSeverity.MEDIUM
     case ErrorCategory.NETWORK:
       return ErrorSeverity.MEDIUM
     case ErrorCategory.VALIDATION:
@@ -85,8 +97,8 @@ function determineSeverity(category: ErrorCategory, error: any): ErrorSeverity {
 }
 
 // Kullanıcı dostu hata mesajları
-function getUserFriendlyMessage(category: ErrorCategory, error: any): string {
-  const originalMessage = error?.message || 'Bilinmeyen bir hata oluştu'
+function getUserFriendlyMessage(category: ErrorCategory, error: unknown): string {
+  const originalMessage = isErrorWithMessage(error) ? error.message : 'Bilinmeyen bir hata oluştu'
 
   switch (category) {
     case ErrorCategory.AUTHENTICATION:
@@ -158,17 +170,17 @@ export class ErrorHandler {
   }
 
   // Hatayı işle
-  handleError(error: any, context?: string, userId?: string): AppError {
+  handleError(error: unknown, context?: string, userId?: string): AppError {
     const category = categorizeError(error)
     const severity = determineSeverity(category, error)
     const userMessage = getUserFriendlyMessage(category, error)
 
     const appError: AppError = {
       message: userMessage,
-      code: error?.code || error?.status?.toString(),
+      code: isErrorWithCode(error) ? error.code : (isErrorWithStatus(error) ? error.status.toString() : undefined),
       details: {
-        originalMessage: error?.message,
-        stack: error?.stack,
+        originalMessage: isErrorWithMessage(error) ? error.message : undefined,
+        stack: error instanceof Error ? error.stack : undefined,
         context,
         category,
         severity,
@@ -294,7 +306,7 @@ export class ErrorHandler {
     maxRetries: number = 3,
     delay: number = 1000
   ): Promise<T> {
-    let lastError: any
+    let lastError: unknown
 
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
       try {
@@ -326,7 +338,7 @@ export class ErrorHandler {
 export const errorHandler = ErrorHandler.getInstance()
 
 // React Query için error handler
-export function handleQueryError(error: any, context?: string): void {
+export function handleQueryError(error: unknown, context?: string): void {
   errorHandler.handleError(error, context)
 }
 
