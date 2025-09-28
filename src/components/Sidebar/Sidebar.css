@@ -2,7 +2,6 @@
 .sidebar-container {
   width: 240px; /* Sidebar genişliği */
   background-color: #000000; /* Tam siyah arka plan rengi */
-  border-right: 1px solid #3a3b47; /* Sağ kenarlık */
   display: flex; /* Flex layout */
   flex-direction: column; /* Dikey yönlendirme */
   padding: 20px 0; /* Üst ve alt padding */
@@ -12,35 +11,13 @@
 /* Sidebar başlık alanı */
 .sidebar-header {
   padding: 0 20px 30px 20px; /* Padding değerleri */
-  border-bottom: 1px solid #3a3b47; /* Alt kenarlık */
 }
 
-/* Logo container stilleri */
-.logo-container {
-  display: flex; /* Flex layout */
-  align-items: center; /* Dikey hizalama */
-  gap: 12px; /* Elementler arası boşluk */
-}
-
-/* Logo ikonu stilleri */
-.logo-icon {
-  width: 32px; /* Genişlik */
-  height: 32px; /* Yükseklik */
-  background: linear-gradient(135deg, #4f8ff7, #3b82f6); /* Gradient arka plan */
-  border-radius: 8px; /* Köşe yuvarlaklığı */
-  display: flex; /* Flex layout */
-  align-items: center; /* Dikey hizalama */
-  justify-content: center; /* Yatay hizalama */
-  color: white; /* Metin rengi */
-  font-weight: 700; /* Font kalınlığı */
-  font-size: 14px; /* Font boyutu */
-}
-
-/* Logo metni stilleri */
-.logo-text {
-  color: #ffffff; /* Beyaz metin rengi */
-  font-size: 18px; /* Font boyutu */
-  font-weight: 600; /* Font kalınlığı */
+/* Logo hover efekti */
+.logo-image:hover {
+  transform: scale(1.05); /* Hover'da büyütme */
+  filter: brightness(1.2) contrast(1.2); /* Daha parlak */
+  box-shadow: 0 4px 12px rgba(79, 143, 247, 0.3); /* Daha belirgin gölge */
 }
 
 /* Navigasyon alanı stilleri */
@@ -98,7 +75,6 @@
 /* Kullanıcı profil alanı stilleri */
 .user-profile {
   padding: 20px; /* Padding değerleri */
-  border-top: 1px solid #3a3b47; /* Üst kenarlık */
   display: flex; /* Flex layout */
   align-items: center; /* Dikey hizalama */
   gap: 12px; /* Elementler arası boşluk */
@@ -144,8 +120,6 @@
   .sidebar-container {
     width: 100%; /* Mobilde tam genişlik */
     height: auto; /* Otomatik yükseklik */
-    border-right: none; /* Sağ kenarlığı kaldır */
-    border-bottom: 1px solid #3a3b47; /* Alt kenarlık ekle */
   }
   
   .nav-item {
