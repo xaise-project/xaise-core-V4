@@ -1,6 +1,6 @@
 /* Staking Card ana container stilleri */
 .staking-card {
-  background-color: #1a1b23; /* Koyu arka plan rengi */
+  background-color: #000000; /* Tam siyah arka plan rengi */
   border: 1px solid #3a3b47; /* Kenarlık */
   border-radius: 12px; /* Köşe yuvarlaklığı */
   padding: 20px; /* İç padding */
@@ -77,7 +77,7 @@
 
 /* APY badge stilleri */
 .apy-badge {
-  background-color: #252730; /* Koyu arka plan */
+  background-color: #000000; /* Tam siyah arka plan */
   border: 1px solid #3a3b47; /* Kenarlık */
   border-radius: 20px; /* Köşe yuvarlaklığı */
   padding: 6px 12px; /* İç padding */
@@ -148,30 +148,51 @@
   font-weight: 600; /* Font kalınlığı */
 }
 
-/* Stake Now butonu stilleri */
-.stake-now-btn {
+/* From Uiverse.io by Naveen-Raaj */
+.stake-now-btn { 
+  font-size: 1.4em;
+  padding: 0.6em 0.8em;
+  border-radius: 0.9em;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 2px 2px 3px #000000b4;
+  position: relative;
+  background: linear-gradient(90deg, #03a9f4, #f441a5); /* kenarların rengi */
+  transition: all 0.4s ease;
   width: 100%; /* Tam genişlik */
-  background-color: #4f8ff7; /* Mavi arka plan */
-  border: none; /* Kenarlık yok */
-  border-radius: 8px; /* Köşe yuvarlaklığı */
-  padding: 12px; /* İç padding */
-  color: #ffffff; /* Beyaz metin rengi */
-  font-size: 14px; /* Font boyutu */
-  font-weight: 600; /* Font kalınlığı */
-  cursor: pointer; /* İmleç pointer */
-  transition: all 0.2s ease; /* Geçiş animasyonu */
+  z-index: 0;
 }
 
-/* Stake Now butonu hover durumu */
-.stake-now-btn:hover {
-  background-color: #3b82f6; /* Hover arka plan rengi */
-  transform: translateY(-1px); /* Hafif yukarı hareket */
+.stake-now-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.9em;
+  background: linear-gradient(90deg, #03a9f4, #f441a5);
+  z-index: -2;
+  filter: blur(0);
+  transition: filter 0.4s ease;
 }
 
-/* Stake Now butonu active durumu */
-.stake-now-btn:active {
-  transform: translateY(0); /* Normal pozisyona dön */
+/* İç katman (siyah arka plan) */
+.stake-now-btn::after {
+  content: "";
+  position: absolute;
+  inset: 2px; /* kenarlık kalınlığı */
+  border-radius: 0.7em;
+  background: #000; /* iç kısım siyah */
+  z-index: -1;
 }
+
+.stake-now-btn:hover::before {
+  filter: blur(1.2em);
+}
+
+.stake-now-btn:active::before {
+  filter: blur(0.2em);
+}
+
 
 /* Responsive tasarım */
 @media (max-width: 480px) {

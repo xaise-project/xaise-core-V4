@@ -12,7 +12,7 @@
 
 body {
   font-family: 'Inter', sans-serif; /* Ana font ailesini Inter olarak ayarla */
-  background-color: #1a1b23; /* Koyu arka plan rengi */
+  background-color: #000000; /* Tam siyah arka plan rengi */
   color: #ffffff; /* Beyaz metin rengi */
   overflow-x: hidden; /* Yatay scroll'u gizle */
 }
