@@ -1,7 +1,10 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { getProtocols, getProtocolsByCategory, getTopProtocols } from '../lib/api'
 import { supabase } from '../lib/supabase'
+import ProtocolsService, { type ProtocolSearchFilters } from '../services/protocols.service'
+import type { Database } from '../types/Database.types'
 import toast from 'react-hot-toast'
+
+type Protocol = Database['public']['Tables']['protocols']['Row']
 
 
 
@@ -10,7 +13,7 @@ import toast from 'react-hot-toast'
 export const protocolKeys = {
   all: ['protocols'] as const,
   lists: () => [...protocolKeys.all, 'list'] as const,
-  list: (filters: ProtocolFilters) => [...protocolKeys.lists(), filters] as const,
+  list: (filters: ProtocolSearchFilters) => [...protocolKeys.lists(), filters] as const,
   details: () => [...protocolKeys.all, 'detail'] as const,
   detail: (id: string) => [...protocolKeys.details(), id] as const,
   categories: () => [...protocolKeys.all, 'categories'] as const,
@@ -18,15 +21,8 @@ export const protocolKeys = {
   top: (limit: number) => [...protocolKeys.all, 'top', limit] as const,
 }
 
-// Filter types
-export interface ProtocolFilters {
-  category?: string
-  minApy?: number
-  maxApy?: number
-  sortBy?: 'apy' | 'tvl' | 'name' | 'created_at'
-  sortOrder?: 'asc' | 'desc'
-  search?: string
-}
+// Filter types - using ProtocolSearchFilters from service
+export type ProtocolFilters = ProtocolSearchFilters
 
 // Ana protokol listesi hook'u
 export function useProtocols(filters: ProtocolFilters = {}) {
@@ -38,7 +34,24 @@ export function useProtocols(filters: ProtocolFilters = {}) {
     isFetching,
   } = useQuery({
     queryKey: protocolKeys.list(filters),
-    queryFn: () => getProtocols(filters),
+    queryFn: async (): Promise<Protocol[]> => {
+      const searchFilters: ProtocolSearchFilters = {
+        category: filters.category,
+        minApy: filters.minApy,
+        maxApy: filters.maxApy,
+        sortBy: filters.sortBy,
+        sortOrder: filters.sortOrder,
+        searchTerm: filters.searchTerm,
+      }
+      
+      const response = await ProtocolsService.searchProtocols(searchFilters)
+      
+      if (!response.success || !response.data) {
+        throw new Error(response.error || 'Failed to fetch protocols')
+      }
+
+      return response.data
+    },
     staleTime: 2 * 60 * 1000, // 2 dakika
     gcTime: 5 * 60 * 1000, // 5 dakika (renamed from cacheTime)
     retry: 2,
@@ -46,11 +59,11 @@ export function useProtocols(filters: ProtocolFilters = {}) {
   })
 
   return {
-    protocols: data?.data || [],
+    protocols: data || [],
     isLoading,
     isFetching,
-    error: data?.error || error,
-    success: data?.success ?? false,
+    error,
+    success: !error,
     refetch,
   }
 }
@@ -64,17 +77,25 @@ export function useProtocolsByCategory(category: string) {
     refetch,
   } = useQuery({
     queryKey: protocolKeys.category(category),
-    queryFn: () => getProtocolsByCategory(category),
+    queryFn: async (): Promise<Protocol[]> => {
+      const response = await ProtocolsService.searchProtocols({ category })
+      
+      if (!response.success || !response.data) {
+        throw new Error(response.error || 'Failed to fetch protocols by category')
+      }
+
+      return response.data
+    },
     enabled: !!category,
     staleTime: 3 * 60 * 1000, // 3 dakika
     retry: 2,
   })
 
   return {
-    protocols: data?.data || [],
+    protocols: data || [],
     isLoading,
-    error: data?.error || error,
-    success: data?.success ?? false,
+    error,
+    success: !error,
     refetch,
   }
 }
@@ -88,118 +109,62 @@ export function useTopProtocols(limit: number = 10) {
     refetch,
   } = useQuery({
     queryKey: protocolKeys.top(limit),
-    queryFn: () => getTopProtocols(limit),
+    queryFn: async (): Promise<Protocol[]> => {
+      const response = await ProtocolsService.getTopProtocols(limit)
+      
+      if (!response.success || !response.data) {
+        throw new Error(response.error || 'Failed to fetch top protocols')
+      }
+
+      return response.data
+    },
     staleTime: 5 * 60 * 1000, // 5 dakika
     retry: 2,
   })
 
   return {
-    protocols: data?.data || [],
+    protocols: data || [],
     isLoading,
-    error: data?.error || error,
-    success: data?.success ?? false,
+    error,
+    success: !error,
     refetch,
   }
 }
 
-// Protokol kategorilerini getiren hook
+// Get all protocol categories
 export function useProtocolCategories() {
-  const {
-    data,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: protocolKeys.categories(),
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('protocols')
-        .select('risk_level')
-        .not('risk_level', 'is', null)
-
-      if (error) {
-        throw new Error(`Failed to fetch categories: ${error.message}`)
+  return useQuery({
+    queryKey: ['protocol-categories'],
+    queryFn: async (): Promise<string[]> => {
+      const response = await ProtocolsService.getCategories()
+      
+      if (!response.success || !response.data) {
+        throw new Error(response.error || 'Failed to fetch categories')
       }
 
-      // Benzersiz kategorileri al
-      const uniqueCategories = [...new Set(data?.map(item => item.risk_level).filter(Boolean))]
-      return uniqueCategories
+      return response.data
     },
-    staleTime: 10 * 60 * 1000, // 10 dakika
-    retry: 1,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes
   })
-
-  return {
-    categories: data || [],
-    isLoading,
-    error,
-  }
 }
 
-// Protokol arama hook'u
-export function useSearchProtocols(searchTerm: string, filters: Omit<ProtocolFilters, 'search'> = {}) {
-  const searchFilters = { ...filters, search: searchTerm }
-  
-  const {
-    data,
-    isLoading,
-    error,
-    refetch,
-  } = useQuery({
-    queryKey: ['protocols', 'search', searchFilters],
-    queryFn: async () => {
-      if (!searchTerm.trim()) {
-        return { data: [], error: null, success: true }
+// Search protocols with filters
+export function useSearchProtocols(filters: ProtocolSearchFilters = {}) {
+  return useQuery({
+    queryKey: ['protocols', 'search', filters],
+    queryFn: async (): Promise<Protocol[]> => {
+      const response = await ProtocolsService.searchProtocols(filters)
+      
+      if (!response.success || !response.data) {
+        throw new Error(response.error || 'Failed to search protocols')
       }
 
-      let query = supabase
-        .from('protocols')
-        .select('*')
-        .or(`name.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%`)
-
-      // Diğer filtreleri uygula
-      if (filters.category) {
-        query = query.eq('risk_level', filters.category as 'low' | 'medium' | 'high')
-      }
-      if (filters.minApy !== undefined) {
-        query = query.gte('apy', filters.minApy)
-      }
-      if (filters.maxApy !== undefined) {
-        query = query.lte('apy', filters.maxApy)
-      }
-
-      // Sıralama
-      const sortBy = filters.sortBy || 'apy'
-      const sortOrder = filters.sortOrder || 'desc'
-      query = query.order(sortBy, { ascending: sortOrder === 'asc' })
-
-      const { data, error } = await query
-
-      if (error) {
-        return {
-          data: null,
-          error: `Search failed: ${error.message}`,
-          success: false
-        }
-      }
-
-      return {
-        data: data || [],
-        error: null,
-        success: true
-      }
+      return response.data
     },
-    enabled: searchTerm.trim().length >= 2, // En az 2 karakter
-    staleTime: 30 * 1000, // 30 saniye
-    retry: 1,
+    staleTime: 2 * 60 * 1000, // 2 minutes
+    gcTime: 5 * 60 * 1000, // 5 minutes
   })
-
-  return {
-    protocols: data?.data || [],
-    isLoading,
-    error: data?.error || error,
-    success: data?.success ?? false,
-    refetch,
-  }
 }
 
 // Protokol favorileme hook'u
