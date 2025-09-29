@@ -1,18 +1,17 @@
 import React from "react"; // React kütüphanesini import et
 import "./Header.css"; // Header CSS dosyasını import et
-
 const Header: React.FC = () => {
   return (
     <header className="header-container">
       {/* Ana header container */}
       {/* Sol taraf - Başlık */}
       <div className="header-left">
+        <img
+          src="/logo_gradient.png"
+          alt="Logo"
+          className="w-10 h-10" // boyutu ayarlamak için
+        />
         <h1 className="page-title">Staking Offerings</h1> {/* Sayfa başlığı */}
-        <button className="learn-more-btn">
-          {/* Daha fazla öğren butonu */}
-          Learn More
-          <div className="flex items-center justify-center w-5 h-5 text-xs bg-gray-700 rounded-full">?</div> {/* Soru işareti ikonu */}
-        </button>
       </div>
       {/* Sağ taraf - Arama ve kullanıcı kontrolleri */}
       <div className="header-right">

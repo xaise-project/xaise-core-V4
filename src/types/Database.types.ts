@@ -260,7 +260,7 @@ export type TablesUpdate<T extends keyof Database['public']['Tables']> = Databas
 // Specific table types
 export type User = Tables<'users'>
 export type Protocol = Tables<'protocols'>
-export type Comment = Tables<'comments'>
+export type CommentType = Tables<'comments'>
 export type Favorite = Tables<'favorites'>
 export type Stake = Tables<'stakes'>
 export type Reward = Tables<'rewards'>
