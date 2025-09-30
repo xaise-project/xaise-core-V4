@@ -4,7 +4,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query' // Reac
 import { Toaster } from 'react-hot-toast' // Toast notification import et
 import App from './App' // Ana App bileşenini import et
 import './index.css' // Global CSS dosyasını import et
-import './custom.css';
 
 // React Query client'ını oluştur
 const queryClient = new QueryClient({
