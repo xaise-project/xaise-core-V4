@@ -18,7 +18,7 @@ function App() {
 
   return (
     <Router>
-      <div className="flex min-h-screen bg-dark-bg">
+      <div className="flex min-h-screen">
         <Sidebar />
         <Routes>
           <Route path="/" element={<MainContent />} />

@@ -1,129 +1,180 @@
 /* Sidebar ana container stilleri */
 .sidebar-container {
-  width: 240px; /* Sidebar genişliği */
-  background-color: #000000; /* Tam siyah arka plan rengi */
-  display: flex; /* Flex layout */
-  flex-direction: column; /* Dikey yönlendirme */
-  padding: 20px 0; /* Üst ve alt padding */
-  height: 100vh; /* Tam yükseklik */
-}
-
-/* Sidebar başlık alanı */
-.sidebar-header {
-  padding: 0 20px 30px 20px; /* Padding değerleri */
+  width: 250px;
+  /* Sidebar genişliği */
+  background-color: #000000;
+  /* Tam siyah arka plan rengi */
+  display: flex;
+  /* Flex layout */
+  flex-direction: column;
+  /* Dikey yönlendirme */
+  padding: 20px 0;
+  /* Üst ve alt padding */
+  height: 100vh;
+  /* Tam yükseklik */
 }
 
 /* Logo hover efekti */
 .logo-image:hover {
-  transform: scale(1.05); /* Hover'da büyütme */
-  filter: brightness(1.2) contrast(1.2); /* Daha parlak */
-  box-shadow: 0 4px 12px rgba(79, 143, 247, 0.3); /* Daha belirgin gölge */
+  transform: scale(1.05);
+  /* Hover'da büyütme */
+  filter: brightness(1.2) contrast(1.2);
+  /* Daha parlak */
+  box-shadow: 0 10px 15px rgba(164, 11, 235, 0.3);
+  /* Daha belirgin gölge */
 }
 
 /* Navigasyon alanı stilleri */
 .sidebar-nav {
-  flex: 1; /* Kalan alanı kapla */
-  padding: 20px 0; /* Üst ve alt padding */
+  flex: 1;
+  /* Kalan alanı kapla */
+  padding: 20px 0;
+  /* Üst ve alt padding */
 }
 
 /* Navigasyon listesi stilleri */
 .nav-list {
-  list-style: none; /* Liste stilini kaldır */
-  padding: 0; /* Padding sıfırla */
-  margin: 0; /* Margin sıfırla */
+  list-style: none;
+  /* Liste stilini kaldır */
+  padding: 0;
+  /* Padding sıfırla */
+  margin: 0;
+  /* Margin sıfırla */
 }
 
 /* Navigasyon öğesi stilleri */
 .nav-item {
-  display: flex; /* Flex layout */
-  align-items: center; /* Dikey hizalama */
-  gap: 12px; /* Elementler arası boşluk */
-  padding: 12px 20px; /* Padding değerleri */
-  margin: 2px 0; /* Üst ve alt margin */
-  color: #9ca3af; /* Gri metin rengi */
-  cursor: pointer; /* İmleç pointer */
-  transition: all 0.2s ease; /* Geçiş animasyonu */
-  border-radius: 0 25px 25px 0; /* Sağ köşeleri yuvarla */
-  margin-right: 20px; /* Sağ margin */
+  display: flex;
+  /* Flex layout */
+  align-items: center;
+  /* Dikey hizalama */
+  gap: 18px;
+  /* Elementler arası boşluk */
+  padding: 12px 20px;
+  /* Padding değerleri */
+  margin: 2px 0;
+  /* Üst ve alt margin */
+  color: #9ca3af;
+  /* Gri metin rengi */
+  cursor: pointer;
+  /* İmleç pointer */
+  transition: all 0.4s ease;
+  /* Geçiş animasyonu */
+  border-radius: 0 25px 25px 0;
+  /* Sağ köşeleri yuvarla */
+  margin-right: 20px;
+  /* Sağ margin */
 }
 
 /* Navigasyon öğesi hover durumu */
 .nav-item:hover {
-  background-color: #3a3b47; /* Hover arka plan rengi */
-  color: #ffffff; /* Beyaz metin rengi */
+  background-image: linear-gradient(to bottom, #805c9b, #7f5da8, #7c5fb5, #7562c3, #6b65d1);
+  /* Hover arka plan rengi */
+  color: #ffffff;
+  /* Beyaz metin rengi */
 }
 
 /* Aktif navigasyon öğesi stilleri */
 .nav-item.active {
-  background-color: #4f8ff7; /* Mavi arka plan */
-  color: #ffffff; /* Beyaz metin rengi */
+  background-image: linear-gradient(to right, #6610a8, #5f19b2, #5520bb, #4827c5, #352ecf);
+  /* Mavi arka plan */
+  color: #ffffff;
+  /* Beyaz metin rengi */
 }
 
 /* Navigasyon ikonu stilleri */
 .nav-icon {
-  width: 20px; /* İkon genişliği */
-  height: 20px; /* İkon yüksekliği */
-  flex-shrink: 0; /* Küçülmeyi engelle */
+  width: 20px;
+  /* İkon genişliği */
+  height: 20px;
+  /* İkon yüksekliği */
+  flex-shrink: 0;
+  /* Küçülmeyi engelle */
 }
 
 /* Navigasyon metni stilleri */
 .nav-text {
-  font-size: 14px; /* Font boyutu */
-  font-weight: 500; /* Font kalınlığı */
+  font-size: 14px;
+  /* Font boyutu */
+  font-weight: 500;
+  /* Font kalınlığı */
 }
 
 /* Kullanıcı profil alanı stilleri */
 .user-profile {
-  padding: 20px; /* Padding değerleri */
-  display: flex; /* Flex layout */
-  align-items: center; /* Dikey hizalama */
-  gap: 12px; /* Elementler arası boşluk */
+  padding: 20px;
+  /* Padding değerleri */
+  display: flex;
+  /* Flex layout */
+  align-items: center;
+  /* Dikey hizalama */
+  gap: 12px;
+  /* Elementler arası boşluk */
 }
 
 /* Profil avatarı stilleri */
 .profile-avatar {
-  width: 40px; /* Avatar genişliği */
-  height: 40px; /* Avatar yüksekliği */
-  border-radius: 50%; /* Yuvarlak avatar */
-  overflow: hidden; /* Taşan içeriği gizle */
+  width: 40px;
+  /* Avatar genişliği */
+  height: 40px;
+  /* Avatar yüksekliği */
+  border-radius: 50%;
+  /* Yuvarlak avatar */
+  overflow: hidden;
+  /* Taşan içeriği gizle */
 }
 
 /* Avatar resmi stilleri */
 .avatar-image {
-  width: 100%; /* Tam genişlik */
-  height: 100%; /* Tam yükseklik */
-  object-fit: cover; /* Resmi kırpmadan sığdır */
+  width: 100%;
+  /* Tam genişlik */
+  height: 100%;
+  /* Tam yükseklik */
+  object-fit: cover;
+  /* Resmi kırpmadan sığdır */
 }
 
 /* Profil bilgileri container */
 .profile-info {
-  display: flex; /* Flex layout */
-  flex-direction: column; /* Dikey yönlendirme */
-  gap: 2px; /* Elementler arası boşluk */
+  display: flex;
+  /* Flex layout */
+  flex-direction: column;
+  /* Dikey yönlendirme */
+  gap: 2px;
+  /* Elementler arası boşluk */
 }
 
 /* Profil adı stilleri */
 .profile-name {
-  color: #ffffff; /* Beyaz metin rengi */
-  font-size: 14px; /* Font boyutu */
-  font-weight: 600; /* Font kalınlığı */
+  color: #ffffff;
+  /* Beyaz metin rengi */
+  font-size: 14px;
+  /* Font boyutu */
+  font-weight: 600;
+  /* Font kalınlığı */
 }
 
 /* Profil handle stilleri */
 .profile-handle {
-  color: #9ca3af; /* Gri metin rengi */
-  font-size: 12px; /* Font boyutu */
+  color: #9ca3af;
+  /* Gri metin rengi */
+  font-size: 12px;
+  /* Font boyutu */
 }
 
 /* Responsive tasarım */
 @media (max-width: 768px) {
   .sidebar-container {
-    width: 100%; /* Mobilde tam genişlik */
-    height: auto; /* Otomatik yükseklik */
+    width: 100%;
+    /* Mobilde tam genişlik */
+    height: auto;
+    /* Otomatik yükseklik */
   }
-  
+
   .nav-item {
-    border-radius: 8px; /* Köşeleri yuvarla */
-    margin-right: 0; /* Sağ margin kaldır */
+    border-radius: 8px;
+    /* Köşeleri yuvarla */
+    margin-right: 0;
+    /* Sağ margin kaldır */
   }
 }

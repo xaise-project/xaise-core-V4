@@ -3,16 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global stiller */
-* {
-  margin: 0; /* Tüm elementlerin margin değerini sıfırla */
-  padding: 0; /* Tüm elementlerin padding değerini sıfırla */
-  box-sizing: border-box; /* Box model hesaplamasını border-box yap */
-}
-
 body {
   font-family: 'Inter', sans-serif; /* Ana font ailesini Inter olarak ayarla */
-  background-color: #000000; /* Tam siyah arka plan rengi */
   color: #ffffff; /* Beyaz metin rengi */
   overflow-x: hidden; /* Yatay scroll'u gizle */
 }

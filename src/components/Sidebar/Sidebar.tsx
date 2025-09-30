@@ -6,26 +6,26 @@ const Sidebar: React.FC = () => {
   return (
     <div className="sidebar-container">
       {" "}
-      {/* Ana sidebar container */}
       {/* Logo ve başlık alanı */}
-      <div className="sidebar-header">
+      
         <img
           src="/Logo.jpg"
           alt="StakingHub"
           className="logo-image"
           style={{
-            height: "38px",
+            height: "80px",
             width: "auto",
             objectFit: "contain",
             cursor: "pointer",
             transition: "transform 0.3s ease",
             filter: "grayscale(0%)",
-            borderRadius: "8px",
-            marginLeft: "50px",
+            borderRadius: "10px",
+            marginLeft: "0px",
+            marginBottom: "10px",
             opacity: "0.9",
           }}
         />
-      </div>
+      
       {/* Navigasyon menüsü */}
       <nav className="sidebar-nav">
         <ul className="nav-list">

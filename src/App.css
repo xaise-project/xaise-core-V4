@@ -2,7 +2,6 @@
 .app-container {
   display: flex; /* Flex layout kullan */
   min-height: 100vh; /* Minimum viewport yüksekliği */
-  background-color: #000000; /* Tam siyah arka plan rengi */
 }
 
 /* Responsive tasarım için medya sorguları */
