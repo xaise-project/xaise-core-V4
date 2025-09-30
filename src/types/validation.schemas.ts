@@ -135,20 +135,81 @@ export const CommentSearchSchema = z.object({
   hasRating: z.boolean().optional()
 }).merge(PaginationSchema)
 
-// Stake Schemas
+// Enhanced Stake Schemas with Advanced Validation
 export const StakeCreateSchema = z.object({
   protocol_id: IdSchema,
   amount: z.number()
     .positive('Stake miktarı pozitif olmalı')
     .multipleOf(0.01, 'Stake miktarı en fazla 2 ondalık basamak içerebilir')
+    .min(0.01, 'Minimum stake miktarı 0.01 olmalı')
+    .max(1000000000, 'Maksimum stake miktarı 1 milyar olabilir')
+    .refine(val => !isNaN(val) && isFinite(val), {
+      message: 'Stake miktarı geçerli bir sayı olmalı'
+    })
 })
 
 export const StakeUpdateSchema = z.object({
   amount: z.number()
     .positive('Stake miktarı pozitif olmalı')
     .multipleOf(0.01, 'Stake miktarı en fazla 2 ondalık basamak içerebilir')
+    .min(0.01, 'Minimum stake miktarı 0.01 olmalı')
+    .max(1000000000, 'Maksimum stake miktarı 1 milyar olabilir')
+    .refine(val => !isNaN(val) && isFinite(val), {
+      message: 'Stake miktarı geçerli bir sayı olmalı'
+    })
     .optional()
 })
+
+// Enhanced Minimum Stake Validation Schema
+export const MinimumStakeValidationSchema = z.object({
+  protocol_id: IdSchema,
+  user_balance: z.number().min(0, 'Kullanıcı bakiyesi negatif olamaz'),
+  stake_amount: z.number().positive('Stake miktarı pozitif olmalı'),
+  protocol_min_stake: z.number().min(0, 'Protokol minimum stake negatif olamaz'),
+  protocol_max_stake: z.number().min(0, 'Protokol maksimum stake negatif olamaz').optional(),
+  user_risk_tolerance: z.enum(['conservative', 'moderate', 'aggressive']).optional(),
+  protocol_risk_level: z.enum(['low', 'medium', 'high']).optional()
+})
+
+// Stake Amount Validation with Protocol Constraints
+export const StakeAmountValidationSchema = z.object({
+  amount: z.number().positive('Stake miktarı pozitif olmalı'),
+  min_stake: z.number().min(0, 'Minimum stake negatif olamaz'),
+  max_stake: z.number().min(0, 'Maksimum stake negatif olamaz').optional(),
+  user_balance: z.number().min(0, 'Kullanıcı bakiyesi negatif olamaz'),
+  protocol_tvl: z.number().min(0, 'Protokol TVL negatif olamaz').optional(),
+  max_individual_stake_percentage: z.number().min(0).max(100, 'Maksimum bireysel stake yüzdesi %100 olamaz').default(10)
+}).refine(
+  (data) => data.amount >= data.min_stake,
+  {
+    message: 'Stake miktarı minimum stake miktarından az olamaz',
+    path: ['amount']
+  }
+).refine(
+  (data) => !data.max_stake || data.amount <= data.max_stake,
+  {
+    message: 'Stake miktarı maksimum stake miktarından fazla olamaz',
+    path: ['amount']
+  }
+).refine(
+  (data) => data.amount <= data.user_balance,
+  {
+    message: 'Stake miktarı kullanıcı bakiyesinden fazla olamaz',
+    path: ['amount']
+  }
+).refine(
+  (data) => {
+    if (data.protocol_tvl && data.protocol_tvl > 0) {
+      const stakePercentage = (data.amount / data.protocol_tvl) * 100
+      return stakePercentage <= data.max_individual_stake_percentage
+    }
+    return true
+  },
+  {
+    message: 'Stake miktarı protokol TVL\'sinin çok büyük bir kısmını oluşturuyor',
+    path: ['amount']
+  }
+)
 
 export const StakeSearchSchema = z.object({
   protocol_id: IdSchema.optional(),
@@ -272,6 +333,8 @@ export type CommentSearchInput = z.infer<typeof CommentSearchSchema>
 export type StakeCreateInput = z.infer<typeof StakeCreateSchema>
 export type StakeUpdateInput = z.infer<typeof StakeUpdateSchema>
 export type StakeSearchInput = z.infer<typeof StakeSearchSchema>
+export type MinimumStakeValidationInput = z.infer<typeof MinimumStakeValidationSchema>
+export type StakeAmountValidationInput = z.infer<typeof StakeAmountValidationSchema>
 
 export type RewardCreateInput = z.infer<typeof RewardCreateSchema>
 export type RewardSearchInput = z.infer<typeof RewardSearchSchema>
