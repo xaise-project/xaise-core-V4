@@ -160,6 +160,8 @@ export interface FavoriteStatsResponse extends ApiResponse<{
 }> {}
 
 // Search and Filter Types
+export type RiskLevel = 'low' | 'medium' | 'high'
+
 export interface SearchFilters {
   query?: string
   category?: string
@@ -167,7 +169,7 @@ export interface SearchFilters {
   maxApy?: number
   minTvl?: number
   maxTvl?: number
-  riskLevel?: 'low' | 'medium' | 'high'
+  riskLevel?: RiskLevel
   sortBy?: 'apy' | 'tvl' | 'created_at' | 'name'
   sortOrder?: 'asc' | 'desc'
 }
