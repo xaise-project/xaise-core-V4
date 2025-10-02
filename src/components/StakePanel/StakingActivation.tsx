@@ -1,11 +1,18 @@
-import React, { useState } from 'react' // React ve useState hook'unu import et
+import React, { useMemo, useState } from 'react'
 import { Lock, Calendar, ChevronDown } from 'lucide-react' // Gerekli ikonları import et
 import './StakingActivation.css' // StakingActivation CSS dosyasını import et
 
-const StakingActivation: React.FC = () => {
-  const [selectedAsset, setSelectedAsset] = useState('Locked') // Seçili asset state'i
-  const [lockPeriod, setLockPeriod] = useState('6 Month') // Kilit periyodu state'i
-  const [stakeAmount, setStakeAmount] = useState('30035.64') // Stake miktarı state'i
+interface StakingActivationProps {
+  minStake: number | null
+  tokenSymbol: string
+}
+
+const StakingActivation: React.FC<StakingActivationProps> = ({ minStake, tokenSymbol }) => {
+  const [selectedAsset, setSelectedAsset] = useState('Locked')
+  const [lockPeriod, setLockPeriod] = useState('6 Month')
+  const [stakeAmount, setStakeAmount] = useState('')
+  const numericAmount = useMemo(() => parseFloat(stakeAmount || '0'), [stakeAmount])
+  const isBelowMin = useMemo(() => (minStake != null && !isNaN(numericAmount) ? numericAmount < minStake : false), [numericAmount, minStake])
 
   return (
     <div className="staking-activation-container"> {/* Ana staking activation container */}
@@ -65,16 +72,23 @@ const StakingActivation: React.FC = () => {
           <label className="form-label">Amount to stake</label> {/* Form etiketi */}
           <div className="amount-container"> {/* Miktar container */}
             <input 
-              type="text" 
+              type="number"
+              inputMode="decimal"
               value={stakeAmount}
               onChange={(e) => setStakeAmount(e.target.value)}
               className="amount-input"
               placeholder="Enter amount"
+              min={minStake ?? undefined}
             />
             <div className="currency-badge"> {/* Para birimi badge'i */}
-              <span className="currency-text">ONT</span> {/* Para birimi metni */}
+              <span className="currency-text">{tokenSymbol}</span>
             </div>
           </div>
+          {isBelowMin && (
+            <div className="validation-hint" style={{ color: '#ef4444', marginTop: 6 }}>
+              Minimum stake is {minStake} {tokenSymbol}
+            </div>
+          )}
         </div>
       </div>
 
@@ -89,7 +103,7 @@ const StakingActivation: React.FC = () => {
         
         <div className="summary-item"> {/* Özet öğesi */}
           <span className="summary-label">Interest Period</span> {/* Özet etiketi */}
-          <span className="summary-value">6 Month</span> {/* Özet değeri */}
+          <span className="summary-value">{lockPeriod}</span> {/* Özet değeri */}
         </div>
         
         <div className="summary-item"> {/* Özet öğesi */}
