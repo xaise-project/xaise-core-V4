@@ -148,6 +148,32 @@
   font-weight: 600; /* Font kalınlığı */
 }
 
+/* Risk göstergesi */
+.risk-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.risk-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: #6b7280; /* default */
+}
+
+.risk-dot[data-level="low"] { background-color: #10b981; }
+.risk-dot[data-level="medium"] { background-color: #f59e0b; }
+.risk-dot[data-level="high"] { background-color: #ef4444; }
+
+.risk-label {
+  color: #9ca3af;
+  font-size: 12px;
+  font-weight: 500;
+}
+
 /* From Uiverse.io by Naveen-Raaj */
 .stake-now-btn { 
   font-size: 1.4em;

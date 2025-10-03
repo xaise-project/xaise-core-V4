@@ -17,12 +17,14 @@ interface StakingData {
   interest: string
   minStake: string
   minStakeAmount: string
+  riskLevel: 'low' | 'medium' | 'high'
   color: string
   logo: string
 }
 
 const StakingOfferings: React.FC = () => {
   const [filterParams, setFilterParams] = useState<any>({})
+  const [currentPage, setCurrentPage] = useState<number>(1)
   
   // Protokol verilerini çek
   const { 
@@ -47,6 +49,8 @@ const StakingOfferings: React.FC = () => {
   const handleFiltersChange = React.useCallback((newFilters: any) => {
     console.log('Filter değişikliği algılandı:', newFilters)
     setFilterParams(newFilters)
+    // Filtre değişince ilk sayfaya dön
+    setCurrentPage(1)
   }, [])
 
   // Protokol verilerini StakingData formatına dönüştür
@@ -60,7 +64,8 @@ const StakingOfferings: React.FC = () => {
       apy: `${protocol.apy}%`,
       interest: `${protocol.apy}%`,
       minStake: `${protocol.min_stake} ETH`,
-      minStakeAmount: 'Min Stake',
+      minStakeAmount: 'Minimum Stake',
+      riskLevel: (protocol.risk_level || 'medium') as 'low' | 'medium' | 'high',
       color: getRiskColor(protocol.risk_level || 'medium'),
       logo: getDefaultLogo(protocol.name)
     }))
@@ -169,6 +174,21 @@ const StakingOfferings: React.FC = () => {
   const filteredProtocols = getFilteredProtocols()
   const stakingData = convertProtocolsToStakingData(filteredProtocols)
 
+  // Sayfalama
+  const itemsPerPage = 6
+  const totalPages = Math.max(1, Math.ceil(stakingData.length / itemsPerPage))
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const paginatedData = stakingData.slice(startIndex, endIndex)
+
+  const goToPage = (page: number) => {
+    if (page < 1 || page > totalPages) return
+    setCurrentPage(page)
+  }
+
+  const goPrev = () => goToPage(currentPage - 1)
+  const goNext = () => goToPage(currentPage + 1)
+
   // Loading state
   if (isLoading) {
     return (
@@ -234,14 +254,46 @@ const StakingOfferings: React.FC = () => {
 
       {/* Staking Grid */}
       {stakingData.length > 0 ? (
-        <div className="staking-grid">
-          {stakingData.map((stake) => (
-            <StakingCard 
-              key={stake.id}
-              data={stake}
-            />
-          ))}
-        </div>
+        <>
+          <div className="staking-grid">
+            {paginatedData.map((stake) => (
+              <StakingCard 
+                key={stake.id}
+                data={stake}
+              />
+            ))}
+          </div>
+
+          {totalPages > 1 && (
+            <div className="pagination">
+              <button
+                className="page-button"
+                onClick={goPrev}
+                disabled={currentPage === 1}
+              >
+                Önceki
+              </button>
+
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                <button
+                  key={page}
+                  className={`page-number ${page === currentPage ? 'active' : ''}`}
+                  onClick={() => goToPage(page)}
+                >
+                  {page}
+                </button>
+              ))}
+
+              <button
+                className="page-button"
+                onClick={goNext}
+                disabled={currentPage === totalPages}
+              >
+                Sonraki
+              </button>
+            </div>
+          )}
+        </>
       ) : (
         <div className="text-center py-12">
           <span className="text-gray-500">Filtrelere uygun protokol bulunamadı</span>

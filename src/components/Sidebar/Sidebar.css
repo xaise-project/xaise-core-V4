@@ -77,7 +77,6 @@
 /* Aktif navigasyon öğesi stilleri */
 .nav-item.active {
   background-image: linear-gradient(to right, #6610a8, #5f19b2, #5520bb, #4827c5, #352ecf);
-  /* Mavi arka plan */
   color: #ffffff;
   /* Beyaz metin rengi */
 }

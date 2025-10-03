@@ -11,6 +11,7 @@ interface StakingCardProps {
     interest: string // Faiz oranı
     minStake: string // Minimum stake miktarı
     minStakeAmount: string // Minimum stake etiketi
+    riskLevel: 'low' | 'medium' | 'high' // Risk seviyesi
     color: string // Kart rengi
     logo: string // Logo URL'i
   }
@@ -45,8 +46,8 @@ const StakingCard: React.FC<StakingCardProps> = ({ data }) => {
         
         {/* APY badge */}
         <div className="apy-badge">
-          <span className="apy-label">{data.apy}</span> {/* APY etiketi */}
-          <span className="apy-value">{data.interest}</span> {/* APY değeri */}
+          <span className="apy-label">APY</span>
+          <span className="apy-value">{data.apy}</span>
         </div>
       </div>
 
@@ -54,16 +55,22 @@ const StakingCard: React.FC<StakingCardProps> = ({ data }) => {
       <div className="card-content">
         {/* Yıllık getiri bilgisi */}
         <div className="annual-yield">
-          <span className="yield-label">Annual percentage yield</span> {/* Yıllık getiri etiketi */}
-          <span className="yield-value">
-            {data.name === 'Cardano' ? '30.45%' : '12.65%'} {/* Dinamik getiri değeri */}
-          </span>
+          <span className="yield-label">Annual percentage yield</span>
+          <span className="yield-value">{data.apy}</span>
         </div>
 
         {/* Minimum stake bilgisi */}
         <div className="min-stake-info">
-          <span className="min-stake-label">{data.minStakeAmount}</span> {/* Minimum stake etiketi */}
-          <span className="min-stake-value">{data.minStake}</span> {/* Minimum stake değeri */}
+          <span className="min-stake-label">{data.minStakeAmount}</span>
+          <span className="min-stake-value">{data.minStake}</span>
+        </div>
+
+        {/* Risk seviyesi göstergesi */}
+        <div className="risk-indicator">
+          <span className="risk-dot" data-level={data.riskLevel}></span>
+          <span className="risk-label">
+            {data.riskLevel === 'low' ? 'Low risk' : data.riskLevel === 'medium' ? 'Medium risk' : 'High risk'}
+          </span>
         </div>
       </div>
 

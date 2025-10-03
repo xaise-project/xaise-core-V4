@@ -13,6 +13,36 @@
   gap: 16px; /* Grid elementleri arası boşluk */
 }
 
+/* Pagination controls */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.page-button,
+.page-number {
+  background-color: #111827;
+  color: #e5e7eb;
+  border: 1px solid #374151;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.page-number.active {
+  background-image: linear-gradient(to right, #6610a8, #5f19b2, #5520bb, #4827c5, #352ecf);
+  color: white;
+}
+
+.page-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* Responsive tasarım */
 @media (max-width: 768px) {
   .staking-offerings-container {
