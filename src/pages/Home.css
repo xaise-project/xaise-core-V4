@@ -1,0 +1,61 @@
+/* Full-screen background with overlay to match reference */
+.home-page {
+  position: relative;
+  min-height: 100vh;
+  color: #ffffff;
+}
+
+/* Use provided background image (second image) */
+.home-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/image-4.jpeg') center/cover no-repeat;
+  filter: brightness(0.35);
+}
+
+.home-page::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* Ensure content sits above overlays */
+.home-nav,
+.home-hero,
+.home-badge { position: relative; z-index: 1; }
+
+.home-nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+}
+.brand { font-weight: 600; letter-spacing: 0.02em; }
+.nav-links { display: none; gap: 24px; color: #d1d5db; }
+@media (min-width: 768px) {
+  .nav-links { display: flex; position: absolute; left: 50%; transform: translateX(-50%); }
+}
+.nav-link { font-size: 0.9rem; color: #d1d5db; text-decoration: none; }
+.nav-link:hover { color: #fff; }
+.nav-link.active { color: #fff; }
+.nav-actions { display: flex; align-items: center; gap: 8px; }
+.login { font-size: 0.85rem; color: #d1d5db; text-decoration: none; }
+.login:hover { color: #fff; }
+.blocks-btn { font-size: 0.85rem; padding: 6px 10px; border-radius: 8px; background: #ffffff; color: #111827; }
+.blocks-btn:hover { background: #f3f4f6; }
+
+.home-hero { max-width: 768px; margin: 96px auto 0; text-align: center; padding: 0 24px; }
+.hero-title { font-size: clamp(28px, 5vw, 44px); font-weight: 800; }
+.hero-subtitle { margin-top: 12px; color: #d1d5db; }
+
+.social { margin-top: 40px; }
+.social-label { font-size: 0.8rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.08em; }
+.social-icons { margin-top: 12px; display: flex; justify-content: center; gap: 24px; }
+.icon { width: 20px; height: 20px; }
+.icon-link { color: #d1d5db; }
+.icon-link:hover { color: #fff; }
+
+.home-badge { position: fixed; right: 16px; bottom: 16px; font-size: 10px; padding: 6px 10px; border-radius: 8px; background: #ffffff; color: #111827; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
