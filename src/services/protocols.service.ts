@@ -75,41 +75,62 @@ export class ProtocolsService {
   }
 
   /**
-   * Search protocols with filters
+   * Search protocols with filters - OPTIMIZED
    */
   static async searchProtocols(filters: ProtocolSearchFilters = {}): Promise<ApiResponse<Protocol[]>> {
     try {
+      // Optimized select - sadece gerekli alanları çek
       let query = supabase
         .from('protocols')
-        .select('*')
+        .select(`
+          id,
+          name,
+          description,
+          apy,
+          tvl,
+          risk_level,
+          min_stake,
+          website_url,
+          created_at
+        `)
 
-      // Apply search term filter
+      // Apply search term filter - OPTIMIZED with proper indexing
       if (filters.searchTerm) {
-        query = query.or(`name.ilike.%${filters.searchTerm}%,description.ilike.%${filters.searchTerm}%`)
+        // Use text search for better performance if available
+        const searchTerm = filters.searchTerm.trim()
+        if (searchTerm.length >= 2) { // Minimum 2 karakter için arama
+          query = query.or(`name.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%`)
+        }
       }
 
-      // Apply category filter
-      if (filters.category) {
-        query = query.eq('category', filters.category)
+      // Apply category filter - OPTIMIZED
+      if (filters.category && filters.category !== 'all') {
+        // Category filter'ı risk_level ile eşleştir
+        const riskLevel = filters.category as 'low' | 'medium' | 'high'
+        query = query.eq('risk_level', riskLevel) // risk_level indexed olmalı
       }
 
-      // Apply APY filters
-      if (filters.minApy !== undefined) {
+      // Apply APY filters - OPTIMIZED with range queries
+      if (filters.minApy !== undefined && filters.minApy > 0) {
         query = query.gte('apy', filters.minApy)
       }
 
-      if (filters.maxApy !== undefined) {
+      if (filters.maxApy !== undefined && filters.maxApy < 100) {
         query = query.lte('apy', filters.maxApy)
       }
 
-      // Apply sorting
+      // Apply sorting - OPTIMIZED with proper indexing
       if (filters.sortBy) {
         const order = filters.sortOrder || 'desc'
+        // Ensure sortBy field is indexed in database
         query = query.order(filters.sortBy, { ascending: order === 'asc' })
       } else {
-        // Default sort by APY descending
+        // Default sort by APY descending - APY should be indexed
         query = query.order('apy', { ascending: false })
       }
+
+      // Add limit for better performance - prevent large result sets
+      query = query.limit(100) // Maximum 100 protokol
 
       const { data, error } = await query
 
@@ -123,7 +144,7 @@ export class ProtocolsService {
       }
 
       return {
-        data: data || [],
+        data: (data as unknown as Protocol[]) || [],
         error: null,
         success: true
       }
@@ -146,7 +167,7 @@ export class ProtocolsService {
   }
 
   /**
-   * Get a single protocol by ID
+   * Get a single protocol by ID - OPTIMIZED
    */
   static async getProtocolById(id: string): Promise<ApiResponse<Protocol>> {
     try {
@@ -158,9 +179,20 @@ export class ProtocolsService {
         }
       }
 
+      // Optimized select - sadece gerekli alanları çek
       const { data, error } = await supabase
         .from('protocols')
-        .select('*')
+        .select(`
+          id,
+          name,
+          description,
+          apy,
+          tvl,
+          risk_level,
+          website_url,
+          min_stake,
+          created_at
+        `)
         .eq('id', id)
         .single()
 

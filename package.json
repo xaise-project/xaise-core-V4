@@ -11,13 +11,30 @@
     "seed": "tsx scripts/seed-database.ts seed",
     "seed:reset": "tsx scripts/seed-database.ts reset",
     "seed:reseed": "tsx scripts/seed-database.ts reseed",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "analyze": "npx vite-bundle-analyzer",
+    "test": "tsx tests/testRunner.ts",
+    "test:health": "tsx tests/testRunner.ts health",
+    "test:performance": "tsx tests/testRunner.ts performance",
+    "test:rewards": "tsx tests/testRunner.ts rewards",
+    "test:statistics": "tsx tests/testRunner.ts statistics",
+    "test:cron": "tsx tests/testRunner.ts cron",
+    "test:integration": "tsx tests/testRunner.ts integration",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
     "@tanstack/react-query": "^5.90.2",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node-cron": "^3.0.11",
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
+    "express-rate-limit": "^8.1.0",
+    "helmet": "^8.1.0",
     "lucide-react": "^0.263.1",
+    "node-cron": "^4.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.6.0",
@@ -28,6 +45,9 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@playwright/test": "^1.55.1",
+    "@types/jest": "^29.5.12",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@types/react-router-dom": "^5.3.3",
@@ -39,10 +59,13 @@
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.22",
+    "jest": "^29.7.0",
     "postcss": "^8.4.27",
     "tailwindcss": "^3.3.3",
     "tsx": "^4.7.0",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vite-bundle-analyzer": "^1.2.3",
+    "webpack-bundle-analyzer": "^4.10.2"
   }
 }

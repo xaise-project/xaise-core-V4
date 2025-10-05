@@ -195,31 +195,55 @@ export interface Database {
           id: string
           user_id: string
           stake_id: string
+          protocol_id?: string
           amount: number
+          reward_type: 'staking' | 'compound' | 'bonus' | 'referral' | 'loyalty'
+          calculation_method: 'daily' | 'weekly' | 'monthly' | 'compound'
+          apy_at_calculation?: number
+          compound_frequency: 'daily' | 'weekly' | 'monthly' | 'yearly'
+          transaction_hash?: string
+          metadata?: Record<string, any>
           reward_date: string
           claimed: boolean
           claim_date: string | null
           created_at: string
+          updated_at?: string
         }
         Insert: {
           id?: string
           user_id: string
           stake_id: string
+          protocol_id?: string
           amount: number
+          reward_type?: 'staking' | 'compound' | 'bonus' | 'referral' | 'loyalty'
+          calculation_method?: 'daily' | 'weekly' | 'monthly' | 'compound'
+          apy_at_calculation?: number
+          compound_frequency?: 'daily' | 'weekly' | 'monthly' | 'yearly'
+          transaction_hash?: string
+          metadata?: Record<string, any>
           reward_date?: string
           claimed?: boolean
           claim_date?: string | null
           created_at?: string
+          updated_at?: string
         }
         Update: {
           id?: string
           user_id?: string
           stake_id?: string
+          protocol_id?: string
           amount?: number
+          reward_type?: 'staking' | 'compound' | 'bonus' | 'referral' | 'loyalty'
+          calculation_method?: 'daily' | 'weekly' | 'monthly' | 'compound'
+          apy_at_calculation?: number
+          compound_frequency?: 'daily' | 'weekly' | 'monthly' | 'yearly'
+          transaction_hash?: string
+          metadata?: Record<string, any>
           reward_date?: string
           claimed?: boolean
           claim_date?: string | null
           created_at?: string
+          updated_at?: string
         }
         Relationships: [
           {
@@ -232,6 +256,12 @@ export interface Database {
             foreignKeyName: "rewards_user_id_fkey"
             columns: ["user_id"]
             referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rewards_protocol_id_fkey"
+            columns: ["protocol_id"]
+            referencedRelation: "protocols"
             referencedColumns: ["id"]
           }
         ]

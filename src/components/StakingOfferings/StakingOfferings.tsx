@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo, useCallback, memo } from 'react'
 import StakingCard from './StakingCard'
 import { FilterPanel } from './FilterPanel/FilterPanel'
 import { useProtocols } from '../../hooks/useProtocols'
 import { useProtocolsRealtime } from '../../hooks/useProtocolsRealtime'
 // import { useProtocolsCacheSync } from '../../hooks/useProtocolsCacheSync'
-import { Loader2, AlertCircle } from 'lucide-react'
+import { AlertCircle } from 'lucide-react'
+import { StakingCardSkeleton, FilterPanelSkeleton } from '../ui/SkeletonLoader'
 import type { Protocol } from '../../types/Database.types'
 import './StakingOfferings.css'
 
@@ -17,21 +18,23 @@ interface StakingData {
   interest: string
   minStake: string
   minStakeAmount: string
-  riskLevel: 'low' | 'medium' | 'high'
   color: string
   logo: string
 }
 
+// Memoized StakingCard component
+const MemoizedStakingCard = memo(StakingCard)
+
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
+
 const StakingOfferings: React.FC = () => {
   const [filterParams, setFilterParams] = useState<any>({})
-  const [currentPage, setCurrentPage] = useState<number>(1)
   
   // Protokol verilerini çek
-  const { 
-    protocols, 
-    isLoading, 
-    error, 
-    refetch 
+  const {
+    protocols,
+    isLoading,
+    error
   } = useProtocols()
 
   // Real-time subscriptions
@@ -45,49 +48,64 @@ const StakingOfferings: React.FC = () => {
   // Cache synchronization
   // const { syncWithServer } = useProtocolsCacheSync()
 
-  // Filter değişikliklerini handle et
-  const handleFiltersChange = React.useCallback((newFilters: any) => {
+  // Filter değişikliklerini handle et - MEMOIZED
+  const handleFiltersChange = useCallback((newFilters: any) => {
     console.log('Filter değişikliği algılandı:', newFilters)
     setFilterParams(newFilters)
-    // Filtre değişince ilk sayfaya dön
-    setCurrentPage(1)
   }, [])
 
-  // Protokol verilerini StakingData formatına dönüştür
-  const convertProtocolsToStakingData = (protocols: Protocol[]): StakingData[] => {
-    if (!protocols) return []
-    
-    return protocols.map((protocol: Protocol) => ({
-      id: protocol.id,
-      name: protocol.name,
-      symbol: protocol.name.substring(0, 3).toUpperCase(),
-      apy: `${protocol.apy}%`,
-      interest: `${protocol.apy}%`,
-      minStake: `${protocol.min_stake} ETH`,
-      minStakeAmount: 'Minimum Stake',
-      riskLevel: (protocol.risk_level || 'medium') as 'low' | 'medium' | 'high',
-      color: getRiskColor(protocol.risk_level || 'medium'),
-      logo: getDefaultLogo(protocol.name)
-    }))
-  }
-
-  // Risk seviyesine göre renk belirle
-  const getRiskColor = (riskLevel: string): string => {
+  // Risk seviyesine göre renk belirle - MEMOIZED
+  const getRiskColor = useCallback((riskLevel: string): string => {
     switch (riskLevel) {
       case 'low': return '#10b981'
       case 'medium': return '#f59e0b'
       case 'high': return '#ef4444'
       default: return '#6b7280'
     }
-  }
+  }, [])
 
-  // Varsayılan logo URL'i oluştur
-  const getDefaultLogo = (name: string): string => {
+  // Varsayılan logo URL'i oluştur - MEMOIZED
+  const getDefaultLogo = useCallback((name: string): string => {
     return `https://trae-api-sg.mchost.guru/api/ide/v1/text_to_image?prompt=${encodeURIComponent(`${name} cryptocurrency logo, clean, modern, circular`)}&image_size=square`
-  }
+  }, [])
 
-  // Filtrelenmiş protokolleri al
-  const getFilteredProtocols = () => {
+  // Protokol verilerini StakingData formatına dönüştür - MEMOIZED
+  const convertProtocolsToStakingData = useCallback((protocols: Protocol[]): StakingData[] => {
+    if (!protocols) return []
+    
+    return protocols.map((protocol: Protocol) => {
+      try {
+        return {
+          id: protocol.id,
+          name: protocol.name,
+          symbol: protocol.name.substring(0, 3).toUpperCase(),
+          apy: `${protocol.apy}%`,
+          interest: `${protocol.apy}%`,
+          minStake: `${protocol.min_stake} ETH`,
+          minStakeAmount: 'Min Stake',
+          color: getRiskColor(protocol.risk_level || 'medium'),
+          logo: getDefaultLogo(protocol.name)
+        }
+      } catch (error) {
+        console.error('Error converting protocol to staking data:', error, protocol)
+        // Return a safe fallback object
+        return {
+          id: protocol.id || 'unknown',
+          name: protocol.name || 'Unknown Protocol',
+          symbol: 'UNK',
+          apy: '0%',
+          interest: '0%',
+          minStake: '0 ETH',
+          minStakeAmount: 'Min Stake',
+          color: '#6b7280',
+          logo: getDefaultLogo('Unknown')
+        }
+      }
+    }).filter(Boolean) // Remove any null/undefined entries
+  }, [getRiskColor, getDefaultLogo])
+
+  // Filtrelenmiş protokolleri al - MEMOIZED
+  const filteredProtocols = useMemo(() => {
     if (!protocols) return []
     
     console.log('Filtreleme başlıyor:', { 
@@ -115,11 +133,6 @@ const StakingOfferings: React.FC = () => {
       filtered = filtered.filter(p => p.risk_level === filterParams.riskLevel)
       console.log(`Risk level filter (${filterParams.riskLevel}): ${beforeCount} -> ${filtered.length}`)
     }
-
-    // Category filter - protocols tablosunda category field yok, bu filtreyi kaldırıyoruz
-    // if (filterParams.category) {
-    //   filtered = filtered.filter(p => p.category === filterParams.category)
-    // }
 
     // Search filter
     if (filterParams.search) {
@@ -169,33 +182,23 @@ const StakingOfferings: React.FC = () => {
     })
 
     return filtered
-  }
+  }, [protocols, filterParams])
 
-  const filteredProtocols = getFilteredProtocols()
-  const stakingData = convertProtocolsToStakingData(filteredProtocols)
-
-  // Sayfalama
-  const itemsPerPage = 6
-  const totalPages = Math.max(1, Math.ceil(stakingData.length / itemsPerPage))
-  const startIndex = (currentPage - 1) * itemsPerPage
-  const endIndex = startIndex + itemsPerPage
-  const paginatedData = stakingData.slice(startIndex, endIndex)
-
-  const goToPage = (page: number) => {
-    if (page < 1 || page > totalPages) return
-    setCurrentPage(page)
-  }
-
-  const goPrev = () => goToPage(currentPage - 1)
-  const goNext = () => goToPage(currentPage + 1)
+  // StakingData'ya dönüştür - MEMOIZED
+  const stakingData = useMemo(() => 
+    convertProtocolsToStakingData(filteredProtocols), 
+    [filteredProtocols, convertProtocolsToStakingData]
+  )
 
   // Loading state
   if (isLoading) {
     return (
       <div className="staking-offerings-container">
-        <div className="flex items-center justify-center py-12">
-          <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
-          <span className="ml-2 text-gray-600">Protokoller yükleniyor...</span>
+        <FilterPanelSkeleton />
+        <div className="staking-grid">
+          {Array.from({ length: 6 }, (_, index) => (
+            <StakingCardSkeleton key={index} />
+          ))}
         </div>
       </div>
     )
@@ -204,18 +207,48 @@ const StakingOfferings: React.FC = () => {
   // Error state
   if (error) {
     return (
-      <div className="staking-offerings-container">
-        <div className="flex flex-col items-center justify-center py-12">
-          <AlertCircle className="h-8 w-8 text-red-600 mb-2" />
-          <span className="text-red-600 mb-4">Protokoller yüklenirken hata oluştu</span>
-          <button
-            onClick={() => refetch()}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Tekrar Dene
-          </button>
+      <ErrorBoundary fallback={
+        <div className="staking-offerings-container">
+          <div className="error-container">
+            <AlertCircle className="error-icon" size={48} />
+            <h3 className="error-title">Protokoller Yüklenemedi</h3>
+            <p className="error-message">
+              Staking protokolleri yüklenirken bir hata oluştu. Lütfen sayfayı yenileyin veya daha sonra tekrar deneyin.
+            </p>
+            <p className="error-message" style={{ marginTop: '8px', fontSize: '12px', opacity: 0.7 }}>
+              Hata detayı: {error}
+            </p>
+            <button 
+              onClick={() => window.location.reload()} 
+              className="retry-button"
+              style={{ 
+                marginTop: '16px', 
+                padding: '8px 16px', 
+                backgroundColor: '#3b82f6', 
+                color: 'white', 
+                border: 'none', 
+                borderRadius: '6px', 
+                cursor: 'pointer' 
+              }}
+            >
+              Sayfayı Yenile
+            </button>
+          </div>
         </div>
-      </div>
+      }>
+        <div className="staking-offerings-container">
+          <div className="error-container">
+            <AlertCircle className="error-icon" size={48} />
+            <h3 className="error-title">Protokoller Yüklenemedi</h3>
+            <p className="error-message">
+              Staking protokolleri yüklenirken bir hata oluştu. Lütfen sayfayı yenileyin veya daha sonra tekrar deneyin.
+            </p>
+            <p className="error-message" style={{ marginTop: '8px', fontSize: '12px', opacity: 0.7 }}>
+              Hata detayı: {error}
+            </p>
+          </div>
+        </div>
+      </ErrorBoundary>
     )
   }
 
@@ -254,46 +287,14 @@ const StakingOfferings: React.FC = () => {
 
       {/* Staking Grid */}
       {stakingData.length > 0 ? (
-        <>
-          <div className="staking-grid">
-            {paginatedData.map((stake) => (
-              <StakingCard 
-                key={stake.id}
-                data={stake}
-              />
-            ))}
-          </div>
-
-          {totalPages > 1 && (
-            <div className="pagination">
-              <button
-                className="page-button"
-                onClick={goPrev}
-                disabled={currentPage === 1}
-              >
-                Önceki
-              </button>
-
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                <button
-                  key={page}
-                  className={`page-number ${page === currentPage ? 'active' : ''}`}
-                  onClick={() => goToPage(page)}
-                >
-                  {page}
-                </button>
-              ))}
-
-              <button
-                className="page-button"
-                onClick={goNext}
-                disabled={currentPage === totalPages}
-              >
-                Sonraki
-              </button>
-            </div>
-          )}
-        </>
+        <div className="staking-grid">
+          {stakingData.map((stake) => (
+            <MemoizedStakingCard 
+              key={stake.id}
+              data={stake}
+            />
+          ))}
+        </div>
       ) : (
         <div className="text-center py-12">
           <span className="text-gray-500">Filtrelere uygun protokol bulunamadı</span>
@@ -303,4 +304,5 @@ const StakingOfferings: React.FC = () => {
   )
 }
 
-export default StakingOfferings
+// Export memoized component
+export default memo(StakingOfferings)
